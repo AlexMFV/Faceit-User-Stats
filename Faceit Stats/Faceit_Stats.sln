@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceit_Stats", "Faceit_Stats\Faceit_Stats.csproj", "{11C78462-6CD0-4E8A-B3FD-BE94692D5833}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceit_Stats", "Faceit_Stats\Faceit_Stats.csproj", "{3B0C61F4-502D-4D16-A8B9-B53A414B22FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{11C78462-6CD0-4E8A-B3FD-BE94692D5833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11C78462-6CD0-4E8A-B3FD-BE94692D5833}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11C78462-6CD0-4E8A-B3FD-BE94692D5833}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11C78462-6CD0-4E8A-B3FD-BE94692D5833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B0C61F4-502D-4D16-A8B9-B53A414B22FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B0C61F4-502D-4D16-A8B9-B53A414B22FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B0C61F4-502D-4D16-A8B9-B53A414B22FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B0C61F4-502D-4D16-A8B9-B53A414B22FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
