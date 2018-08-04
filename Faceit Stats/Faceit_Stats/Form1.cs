@@ -14,6 +14,7 @@ namespace Faceit_Stats
 {
     public partial class Form1 : Form
     {
+        Point mouseLoc;
         string api_key = "c610a884-dcf9-474c-86a1-6fa5178018ca";
         string json;
 
@@ -58,6 +59,36 @@ namespace Faceit_Stats
                 {
                     MessageBox.Show(ex.ToString());
                 }
+            }
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pnlTopBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseLoc = new Point(-e.X, -e.Y);
+        }
+
+        private void btnLogo_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.faceit.com");
+        }
+
+        private void pnlTopBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point mousePos = MousePosition;
+                mousePos.Offset(mouseLoc.X, mouseLoc.Y);
+                Location = mousePos;
             }
         }
     }
