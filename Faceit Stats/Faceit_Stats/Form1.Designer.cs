@@ -32,10 +32,10 @@
             this.lblUser = new System.Windows.Forms.Label();
             this.txtUser = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.pnlTopBar = new System.Windows.Forms.Panel();
-            this.btnConnect = new System.Windows.Forms.Button();
             this.btnLogo = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnClose = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnMinimize = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btnConnect = new System.Windows.Forms.Button();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -89,23 +89,6 @@
             this.pnlTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTopBar_MouseDown);
             this.pnlTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTopBar_MouseMove);
             // 
-            // btnConnect
-            // 
-            this.btnConnect.BackgroundImage = global::Faceit_Stats.Properties.Resources.Button;
-            this.btnConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnConnect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConnect.FlatAppearance.BorderSize = 0;
-            this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConnect.Font = new System.Drawing.Font("Fragma", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect.Image = global::Faceit_Stats.Properties.Resources.Button;
-            this.btnConnect.Location = new System.Drawing.Point(118, 97);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(127, 35);
-            this.btnConnect.TabIndex = 2;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
-            // 
             // btnLogo
             // 
             this.btnLogo.Image = ((System.Drawing.Image)(resources.GetObject("btnLogo.Image")));
@@ -151,6 +134,23 @@
             this.btnMinimize.Zoom = 0;
             this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
             // 
+            // btnConnect
+            // 
+            this.btnConnect.BackgroundImage = global::Faceit_Stats.Properties.Resources.Button;
+            this.btnConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnConnect.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConnect.FlatAppearance.BorderSize = 0;
+            this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConnect.Font = new System.Drawing.Font("Fragma", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConnect.Image = global::Faceit_Stats.Properties.Resources.Button;
+            this.btnConnect.Location = new System.Drawing.Point(118, 97);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(127, 35);
+            this.btnConnect.TabIndex = 2;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnConnect;
@@ -164,6 +164,7 @@
             this.Controls.Add(this.lblUser);
             this.Font = new System.Drawing.Font("Fragma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
