@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,14 +51,17 @@ namespace Faceit_Stats
                             }
                         }
                     }
+                    JObject objects = JObject.Parse(json); // parse as array  
+                    if (objects.SelectToken("steam_id_64").ToString() == "")
+                        throw new Exception("The specified user didn't setup his accout!");
 
                     PlayerStats form = new PlayerStats(json);
                     this.Hide();
                     form.ShowDialog();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

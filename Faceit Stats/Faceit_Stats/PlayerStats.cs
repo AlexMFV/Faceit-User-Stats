@@ -9,13 +9,27 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace Faceit_Stats
 {
     public partial class PlayerStats : Form
     {
         string json;
-        public Point mouseLoc;
+        Point mouseLoc;
+        string flagURL1 = "https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/flags/";
+        string globalURL1 = "https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/region-flags/";
+
+        #region Variaveis
+
+        Image pImage; //Imagem do Jogador
+        string inGameName;
+        Image Flag;
+        Image GlobalFlag;
+        int skillLevel; // 1-10 level
+        string currRegion;
+
+        #endregion
 
         public PlayerStats(string jsonString)
         {
@@ -60,15 +74,21 @@ namespace Faceit_Stats
 
         private void PlayerStats_Load(object sender, EventArgs e)
         {
-            btnPImage.Image = GetImage();
+            GetJsonValues();
+
+            btnPImage.Image = pImage; //Set Player Image
+            lblIGN.Text = inGameName; //Set Player Ingame Name
+            btnFlag.Image = Flag;
+            btnRegion.Image = Flag;
+            btnGlobalFlag.Image = GlobalFlag;
         }
 
-        public Image GetImage()
+        public Image GetPlayerImage(string imgURL)
         {
             try
             {
                 WebClient client = new WebClient();
-                Stream stream = client.OpenRead(pImage.Text);
+                Stream stream = client.OpenRead(imgURL);
                 Image imagem = Image.FromStream(stream);
 
                 stream.Flush();
@@ -84,23 +104,62 @@ namespace Faceit_Stats
             }
         }
 
-        public  GetFromJsonString(string str, )
+        public void GetJsonValues()
         {
-        var objects = JArray.Parse(json); // parse as array  
-    foreach(JObject root in objects)
-    {
-        foreach(KeyValuePair<String, JToken> app in root)
-        {
-            var appName = app.Key;
-        var description = (String)app.Value["Description"];
-        var value = (String)app.Value["Value"];
+            try
+            {
+                JObject objects = JObject.Parse(json); // parse as array  
+                foreach (KeyValuePair<string, JToken> root in objects)
+                {
+                    if ((string)root.Key == "avatar") //Get Player Image
+                        if ((string)root.Value != "")
+                            pImage = GetPlayerImage((string)root.Value);
+                        else
+                            pImage = Properties.Resources.NoImg;
 
-        Console.WriteLine(appName);
-            Console.WriteLine(description);
-            Console.WriteLine(value);
-            Console.WriteLine("\n");
+                    if ((string)root.Key == "nickname")
+                        inGameName = (string)root.Value;
+
+                    if ((string)root.Key == "country")
+                        Flag = GetPlayerImage(flagURL1 + root.Value.ToString().ToUpper() + ".png"); //@2x
+
+                    if ((string)root.Key == "games" && root.Value.Count() != 0)
+                    {
+                        skillLevel = (int)root.Value.SelectToken("csgo").SelectToken("skill_level");
+                        currRegion = root.Value.SelectToken("csgo").SelectToken("region").ToString();
+
+                        if (currRegion == "Oceania")
+                            currRegion = "oc";
+
+                        prgLevel.Value = skillLevel;
+                        lblPlayerLevel.Text = skillLevel.ToString();
+                        prgLevel.ProgressColor = lblPlayerLevel.ForeColor = PaintLevel(skillLevel);
+                        GlobalFlag = GetPlayerImage(globalURL1 + currRegion.ToUpper() + ".png");
+                        //inGameName = root.Value.SelectToken("csgo").SelectToken("game_player_name").ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
-}
-}
+
+        public Color PaintLevel(int lvl)
+        {
+            switch (lvl)
+            {
+                case 2: return Color.FromArgb(34, 200, 6);
+                case 3: return Color.FromArgb(34, 200, 6);
+                case 4: return Color.FromArgb(255, 214, 0);
+                case 5: return Color.FromArgb(255, 214, 0);
+                case 6: return Color.FromArgb(255, 214, 0);
+                case 7: return Color.FromArgb(255, 214, 0);
+                case 8: return Color.FromArgb(242, 105, 29);
+                case 9: return Color.FromArgb(242, 105, 29);
+                case 10: return Color.FromArgb(209, 34, 34);
+                default: return Color.White;
+            }
+        }
     }
 }
