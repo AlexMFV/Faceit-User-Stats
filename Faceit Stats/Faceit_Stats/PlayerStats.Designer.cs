@@ -42,6 +42,8 @@
             this.btnRegion = new Bunifu.Framework.UI.BunifuImageButton();
             this.label1 = new System.Windows.Forms.Label();
             this.btnGlobalFlag = new Bunifu.Framework.UI.BunifuImageButton();
+            this.lblCountryRank = new System.Windows.Forms.Label();
+            this.lblRegionRank = new System.Windows.Forms.Label();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -151,6 +153,7 @@
             // btnPImage
             // 
             this.btnPImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPImage.Image = ((System.Drawing.Image)(resources.GetObject("btnPImage.Image")));
             this.btnPImage.ImageActive = null;
             this.btnPImage.Location = new System.Drawing.Point(53, 26);
@@ -160,16 +163,17 @@
             this.btnPImage.TabIndex = 0;
             this.btnPImage.TabStop = false;
             this.btnPImage.Zoom = 0;
+            this.btnPImage.Click += new System.EventHandler(this.btnPImage_Click);
             // 
             // lblPlayerLevel
             // 
             this.lblPlayerLevel.Font = new System.Drawing.Font("Fragma", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlayerLevel.ForeColor = System.Drawing.Color.White;
-            this.lblPlayerLevel.Location = new System.Drawing.Point(285, 86);
+            this.lblPlayerLevel.Location = new System.Drawing.Point(285, 87);
             this.lblPlayerLevel.Name = "lblPlayerLevel";
             this.lblPlayerLevel.Size = new System.Drawing.Size(79, 43);
             this.lblPlayerLevel.TabIndex = 2;
-            this.lblPlayerLevel.Text = "10";
+            this.lblPlayerLevel.Text = "lvl";
             this.lblPlayerLevel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // prgLevel
@@ -184,7 +188,7 @@
             this.prgLevel.LabelVisible = false;
             this.prgLevel.LineProgressThickness = 8;
             this.prgLevel.LineThickness = 5;
-            this.prgLevel.Location = new System.Drawing.Point(259, 47);
+            this.prgLevel.Location = new System.Drawing.Point(259, 48);
             this.prgLevel.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.prgLevel.MaxValue = 10;
             this.prgLevel.Name = "prgLevel";
@@ -198,7 +202,7 @@
             // 
             this.btnRegion.Image = ((System.Drawing.Image)(resources.GetObject("btnRegion.Image")));
             this.btnRegion.ImageActive = null;
-            this.btnRegion.Location = new System.Drawing.Point(473, 73);
+            this.btnRegion.Location = new System.Drawing.Point(427, 75);
             this.btnRegion.Name = "btnRegion";
             this.btnRegion.Size = new System.Drawing.Size(30, 20);
             this.btnRegion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -213,19 +217,41 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(560, 323);
             this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
+            this.label1.Text = "Tests";
             // 
             // btnGlobalFlag
             // 
             this.btnGlobalFlag.Image = ((System.Drawing.Image)(resources.GetObject("btnGlobalFlag.Image")));
             this.btnGlobalFlag.ImageActive = null;
-            this.btnGlobalFlag.Location = new System.Drawing.Point(473, 123);
+            this.btnGlobalFlag.Location = new System.Drawing.Point(427, 125);
             this.btnGlobalFlag.Name = "btnGlobalFlag";
             this.btnGlobalFlag.Size = new System.Drawing.Size(30, 20);
             this.btnGlobalFlag.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnGlobalFlag.TabIndex = 5;
             this.btnGlobalFlag.TabStop = false;
             this.btnGlobalFlag.Zoom = 10;
+            // 
+            // lblCountryRank
+            // 
+            this.lblCountryRank.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountryRank.ForeColor = System.Drawing.Color.White;
+            this.lblCountryRank.Location = new System.Drawing.Point(463, 70);
+            this.lblCountryRank.Name = "lblCountryRank";
+            this.lblCountryRank.Size = new System.Drawing.Size(129, 26);
+            this.lblCountryRank.TabIndex = 6;
+            this.lblCountryRank.Text = "Country Rank";
+            this.lblCountryRank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRegionRank
+            // 
+            this.lblRegionRank.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegionRank.ForeColor = System.Drawing.Color.White;
+            this.lblRegionRank.Location = new System.Drawing.Point(463, 121);
+            this.lblRegionRank.Name = "lblRegionRank";
+            this.lblRegionRank.Size = new System.Drawing.Size(129, 26);
+            this.lblRegionRank.TabIndex = 7;
+            this.lblRegionRank.Text = "Region Rank";
+            this.lblRegionRank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PlayerStats
             // 
@@ -234,6 +260,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(795, 517);
+            this.Controls.Add(this.lblRegionRank);
+            this.Controls.Add(this.lblCountryRank);
             this.Controls.Add(this.btnGlobalFlag);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRegion);
@@ -277,5 +305,7 @@
         private Bunifu.Framework.UI.BunifuImageButton btnRegion;
         private System.Windows.Forms.Label label1;
         private Bunifu.Framework.UI.BunifuImageButton btnGlobalFlag;
+        private System.Windows.Forms.Label lblCountryRank;
+        private System.Windows.Forms.Label lblRegionRank;
     }
 }

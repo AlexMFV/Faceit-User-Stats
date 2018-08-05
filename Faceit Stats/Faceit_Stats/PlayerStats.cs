@@ -19,6 +19,7 @@ namespace Faceit_Stats
         Point mouseLoc;
         string flagURL1 = "https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/flags/";
         string globalURL1 = "https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/region-flags/";
+        string crURL = "https://open.faceit.com/data/v4/rankings/games/csgo/regions/";
 
         #region Variaveis
 
@@ -28,6 +29,10 @@ namespace Faceit_Stats
         Image GlobalFlag;
         int skillLevel; // 1-10 level
         string currRegion;
+        string currCountry;
+        string pID;
+        int countryRank;
+        int regionRank;
 
         #endregion
 
@@ -81,6 +86,7 @@ namespace Faceit_Stats
             btnFlag.Image = Flag;
             btnRegion.Image = Flag;
             btnGlobalFlag.Image = GlobalFlag;
+
         }
 
         public Image GetPlayerImage(string imgURL)
@@ -99,8 +105,62 @@ namespace Faceit_Stats
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Occurred!");
-                return null;
+                return Properties.Resources.NoImg;
+            }
+        }
+
+        public void GetPlayerRanking()
+        {
+            string regiao;
+
+            if (currRegion == "OC")
+                regiao = "Oceania";
+            else
+                regiao = currRegion;
+
+
+            if (regiao != "")
+            {
+                JObject ranks = JObject.Parse(GetNewWebRequest(crURL + regiao +
+                    "/players/" + pID + "?country=" +
+                    currCountry.ToLower() + "&limit=1"));
+
+                countryRank = (int)ranks.SelectToken("position");
+
+                ranks = JObject.Parse(GetNewWebRequest(crURL + regiao +
+                    "/players/" + pID + "?limit=1"));
+
+                regionRank = (int)ranks.SelectToken("position");
+            }
+        }
+
+        public string GetNewWebRequest(string http)
+        {
+            string api_key = "c610a884-dcf9-474c-86a1-6fa5178018ca";
+            try
+            {
+                WebRequest req = WebRequest.Create(http);
+                if (req != null)
+                {
+                    req.Method = "GET";
+                    req.Timeout = 12000;
+                    req.ContentType = "application/json";
+                    req.Headers.Add("Authorization", "Bearer " + api_key);
+
+                    using (Stream s = req.GetResponse().GetResponseStream())
+                    {
+                        using (StreamReader sr = new StreamReader(s))
+                        {
+                            json = sr.ReadToEnd();
+                        }
+                    }
+                }
+                return json;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
             }
         }
 
@@ -108,7 +168,8 @@ namespace Faceit_Stats
         {
             try
             {
-                JObject objects = JObject.Parse(json); // parse as array  
+                JObject objects = JObject.Parse(json); // parse as array 
+                pID = objects.SelectToken("player_id").ToString();
                 foreach (KeyValuePair<string, JToken> root in objects)
                 {
                     if ((string)root.Key == "avatar") //Get Player Image
@@ -121,21 +182,37 @@ namespace Faceit_Stats
                         inGameName = (string)root.Value;
 
                     if ((string)root.Key == "country")
-                        Flag = GetPlayerImage(flagURL1 + root.Value.ToString().ToUpper() + ".png"); //@2x
+                    {
+                        currCountry = root.Value.ToString().ToUpper();
+                        Flag = GetPlayerImage(flagURL1 + currCountry + ".png"); //@2x
+                    }
 
                     if ((string)root.Key == "games" && root.Value.Count() != 0)
                     {
                         skillLevel = (int)root.Value.SelectToken("csgo").SelectToken("skill_level");
-                        currRegion = root.Value.SelectToken("csgo").SelectToken("region").ToString();
+                        currRegion = root.Value.SelectToken("csgo").SelectToken("region").ToString().ToUpper();
 
-                        if (currRegion == "Oceania")
-                            currRegion = "oc";
+                        if (currRegion == "OCEANIA")
+                            currRegion = "OC";
+
+                        GetPlayerRanking();
+
+                        if (currRegion == "")
+                        {
+                            lblRegionRank.Text = "Unranked";
+                            lblCountryRank.Text = "Unranked";
+                            GlobalFlag = Properties.Resources.No_Flag;
+                        }
+                        else
+                        {
+                            GlobalFlag = GetPlayerImage(globalURL1 + currRegion + ".png");
+                            lblCountryRank.Text = currCountry + ": " + countryRank.ToString("#,#");
+                            lblRegionRank.Text = currRegion + ": " + regionRank.ToString("#,#");
+                        }
 
                         prgLevel.Value = skillLevel;
                         lblPlayerLevel.Text = skillLevel.ToString();
                         prgLevel.ProgressColor = lblPlayerLevel.ForeColor = PaintLevel(skillLevel);
-                        GlobalFlag = GetPlayerImage(globalURL1 + currRegion.ToUpper() + ".png");
-                        //inGameName = root.Value.SelectToken("csgo").SelectToken("game_player_name").ToString();
                     }
                 }
             }
@@ -160,6 +237,11 @@ namespace Faceit_Stats
                 case 10: return Color.FromArgb(209, 34, 34);
                 default: return Color.White;
             }
+        }
+
+        private void btnPImage_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.faceit.com/en/players/" + inGameName);
         }
     }
 }
