@@ -36,6 +36,15 @@ namespace Faceit_Stats
 
         private void PlayerStats_Load(object sender, EventArgs e)
         {
+            LoadForm(Username);
+
+            this.Show();
+            SplashScreen.CloseSplashScreen();
+            this.Activate();
+        }
+
+        public void LoadForm(string Username)
+        {
             Player P = new Player(Username);
 
             btnPImage.Image = P.Avatar;
@@ -66,10 +75,6 @@ namespace Faceit_Stats
                 lblCountryRank.Text = "Unranked";
                 lblRegionRank.Text = "Unranked";
             }
-
-            this.Show();
-            SplashScreen.CloseSplashScreen();
-            this.Activate();
         }
 
         private void PlayerStats_FormClosing(object sender, FormClosingEventArgs e)
@@ -168,6 +173,18 @@ namespace Faceit_Stats
                 }));
             });
             t.Start();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
+            LoadForm(Username);
+            this.Show();
+            SplashScreen.CloseSplashScreen();
+            this.Activate();
         }
     }
 }
