@@ -81,6 +81,15 @@ namespace Faceit_Stats.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/flags/.
+        /// </summary>
+        internal static string FlagURL {
+            get {
+                return ResourceManager.GetString("FlagURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap logo {
@@ -127,6 +136,24 @@ namespace Faceit_Stats.Properties {
             get {
                 object obj = ResourceManager.GetObject("NoImg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a https://open.faceit.com/data/v4/rankings/games/csgo/regions/.
+        /// </summary>
+        internal static string RankingURL {
+            get {
+                return ResourceManager.GetString("RankingURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/region-flags/.
+        /// </summary>
+        internal static string RegionFlagURL {
+            get {
+                return ResourceManager.GetString("RegionFlagURL", resourceCulture);
             }
         }
     }

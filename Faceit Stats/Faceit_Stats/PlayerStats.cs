@@ -7,39 +7,52 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using PR = Faceit_Stats.Properties.Resources;
 
 namespace Faceit_Stats
 {
     public partial class PlayerStats : Form
     {
-        string json;
-        Point mouseLoc;
-        string flagURL1 = "https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/flags/";
-        string globalURL1 = "https://cdn-frontend.faceit.com/web/7-1533408307/src/app/assets/images-compress/region-flags/";
-        string crURL = "https://open.faceit.com/data/v4/rankings/games/csgo/regions/";
-
         #region Variaveis
 
-        Image pImage; //Imagem do Jogador
-        string inGameName;
-        Image Flag;
-        Image GlobalFlag;
-        int skillLevel; // 1-10 level
-        string currRegion;
-        string currCountry;
-        string pID;
-        int countryRank;
-        int regionRank;
+        string Username;
+        Point mouseLoc;     
 
         #endregion
 
-        public PlayerStats(string jsonString)
+        public PlayerStats(string nick)
         {
+            this.Hide();
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
             InitializeComponent();
-            json = jsonString;
+            Username = nick;
+        }
+
+        private void PlayerStats_Load(object sender, EventArgs e)
+        {
+            Player P = new Player(Username);
+
+            btnPImage.Image = P.Avatar;
+            btnFlag.Image = P.Flag;
+            lblIGN.Text = P.InGameName;
+            prgLevel.ProgressColor = PaintLevel(P.Skill_Level);
+            prgLevel.Value = P.Skill_Level;
+            lblPlayerLevel.ForeColor = PaintLevel(P.Skill_Level);
+            lblPlayerLevel.Text = P.Skill_Level.ToString();
+            btnRegion.Image = P.Flag;
+            btnGlobalFlag.Image = P.GlobalFlag;
+            lblCountryRank.Text = P.Country + ": " + P.CountryRank.ToString("#,#");
+            lblRegionRank.Text = P.Region + ": " + P.RegionRank.ToString("#,#");
+
+            this.Show();
+            SplashScreen.CloseSplashScreen();
+            this.Activate();
         }
 
         private void PlayerStats_FormClosing(object sender, FormClosingEventArgs e)
@@ -77,151 +90,6 @@ namespace Faceit_Stats
             }
         }
 
-        private void PlayerStats_Load(object sender, EventArgs e)
-        {
-            GetJsonValues();
-
-            btnPImage.Image = pImage; //Set Player Image
-            lblIGN.Text = inGameName; //Set Player Ingame Name
-            btnFlag.Image = Flag;
-            btnRegion.Image = Flag;
-            btnGlobalFlag.Image = GlobalFlag;
-
-        }
-
-        public Image GetPlayerImage(string imgURL)
-        {
-            try
-            {
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead(imgURL);
-                Image imagem = Image.FromStream(stream);
-
-                stream.Flush();
-                stream.Close();
-                client.Dispose();
-
-                return imagem;
-            }
-            catch (Exception ex)
-            {
-                return Properties.Resources.NoImg;
-            }
-        }
-
-        public void GetPlayerRanking()
-        {
-            string regiao;
-
-            if (currRegion == "OC")
-                regiao = "Oceania";
-            else
-                regiao = currRegion;
-
-
-            if (regiao != "")
-            {
-                JObject ranks = JObject.Parse(GetNewWebRequest(crURL + regiao +
-                    "/players/" + pID + "?country=" +
-                    currCountry.ToLower() + "&limit=1"));
-
-                countryRank = (int)ranks.SelectToken("position");
-
-                ranks = JObject.Parse(GetNewWebRequest(crURL + regiao +
-                    "/players/" + pID + "?limit=1"));
-
-                regionRank = (int)ranks.SelectToken("position");
-            }
-        }
-
-        public string GetNewWebRequest(string http)
-        {
-            string api_key = "c610a884-dcf9-474c-86a1-6fa5178018ca";
-            try
-            {
-                WebRequest req = WebRequest.Create(http);
-                if (req != null)
-                {
-                    req.Method = "GET";
-                    req.Timeout = 12000;
-                    req.ContentType = "application/json";
-                    req.Headers.Add("Authorization", "Bearer " + api_key);
-
-                    using (Stream s = req.GetResponse().GetResponseStream())
-                    {
-                        using (StreamReader sr = new StreamReader(s))
-                        {
-                            json = sr.ReadToEnd();
-                        }
-                    }
-                }
-                return json;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return "";
-            }
-        }
-
-        public void GetJsonValues()
-        {
-            try
-            {
-                JObject objects = JObject.Parse(json); // parse as array 
-                pID = objects.SelectToken("player_id").ToString();
-                foreach (KeyValuePair<string, JToken> root in objects)
-                {
-                    if ((string)root.Key == "avatar") //Get Player Image
-                        if ((string)root.Value != "")
-                            pImage = GetPlayerImage((string)root.Value);
-                        else
-                            pImage = Properties.Resources.NoImg;
-
-                    if ((string)root.Key == "nickname")
-                        inGameName = (string)root.Value;
-
-                    if ((string)root.Key == "country")
-                    {
-                        currCountry = root.Value.ToString().ToUpper();
-                        Flag = GetPlayerImage(flagURL1 + currCountry + ".png"); //@2x
-                    }
-
-                    if ((string)root.Key == "games" && root.Value.Count() != 0)
-                    {
-                        skillLevel = (int)root.Value.SelectToken("csgo").SelectToken("skill_level");
-                        currRegion = root.Value.SelectToken("csgo").SelectToken("region").ToString().ToUpper();
-
-                        if (currRegion == "OCEANIA")
-                            currRegion = "OC";
-
-                        GetPlayerRanking();
-
-                        if (currRegion == "")
-                        {
-                            lblRegionRank.Text = "Unranked";
-                            lblCountryRank.Text = "Unranked";
-                            GlobalFlag = Properties.Resources.No_Flag;
-                        }
-                        else
-                        {
-                            GlobalFlag = GetPlayerImage(globalURL1 + currRegion + ".png");
-                            lblCountryRank.Text = currCountry + ": " + countryRank.ToString("#,#");
-                            lblRegionRank.Text = currRegion + ": " + regionRank.ToString("#,#");
-                        }
-
-                        prgLevel.Value = skillLevel;
-                        lblPlayerLevel.Text = skillLevel.ToString();
-                        prgLevel.ProgressColor = lblPlayerLevel.ForeColor = PaintLevel(skillLevel);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
         public Color PaintLevel(int lvl)
         {
             switch (lvl)
@@ -241,7 +109,33 @@ namespace Faceit_Stats
 
         private void btnPImage_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.faceit.com/en/players/" + inGameName);
+            System.Diagnostics.Process.Start("https://www.faceit.com/en/players/" + Username);
+        }
+
+        private static void ShowSplash()
+        {
+            Processing sp = new Processing();
+            sp.Show();
+            Application.DoEvents();
+
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Interval = 1000;
+            t.Tick += new EventHandler((sender, ea) =>
+            {
+                sp.BeginInvoke(new Action(() =>
+                {
+                    if (sp != null && Application.OpenForms.Count > 1)
+                    {
+                        sp.Close();
+                        sp.Dispose();
+                        sp = null;
+                        t.Stop();
+                        t.Dispose();
+                        t = null;
+                    }
+                }));
+            });
+            t.Start();
         }
     }
 }

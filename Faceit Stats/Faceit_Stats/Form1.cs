@@ -55,8 +55,8 @@ namespace Faceit_Stats
                     if (objects.SelectToken("steam_id_64").ToString() == "")
                         throw new Exception("The specified user didn't setup his accout!");
 
-                    PlayerStats form = new PlayerStats(json);
                     this.Hide();
+                    PlayerStats form = new PlayerStats((string)objects.SelectToken("nickname")); //json
                     form.ShowDialog();
                 }
                 catch (Exception ex)
