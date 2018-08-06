@@ -47,8 +47,25 @@ namespace Faceit_Stats
             lblPlayerLevel.Text = P.Skill_Level.ToString();
             btnRegion.Image = P.Flag;
             btnGlobalFlag.Image = P.GlobalFlag;
-            lblCountryRank.Text = P.Country + ": " + P.CountryRank.ToString("#,#");
-            lblRegionRank.Text = P.Region + ": " + P.RegionRank.ToString("#,#");
+            lblPlayerELO.Text = P.InGameName.ToUpper() + "'S ELO IS " + P.ELO;
+            prgElo.Value = (P.ELO > 2200 ? 2200 : P.ELO);
+
+            if (P.Skill_Level != 10)
+                lblNextLevel.Text = "To reach level " + (P.Skill_Level + 1)
+                    + " you need " + EloCount(P.ELO, (P.Skill_Level + 1)) + " more points";
+            else
+                lblNextLevel.Text = "Congratulations! You're a beast!";
+
+            if (P.Region != "")
+            {
+                lblCountryRank.Text = P.Country + ": " + P.CountryRank.ToString("#,#");
+                lblRegionRank.Text = P.Region + ": " + P.RegionRank.ToString("#,#");
+            }
+            else
+            {
+                lblCountryRank.Text = "Unranked";
+                lblRegionRank.Text = "Unranked";
+            }
 
             this.Show();
             SplashScreen.CloseSplashScreen();
@@ -104,6 +121,21 @@ namespace Faceit_Stats
                 case 9: return Color.FromArgb(242, 105, 29);
                 case 10: return Color.FromArgb(209, 34, 34);
                 default: return Color.White;
+            }
+        }
+
+        public int EloCount(int Elo, int level)
+        {
+            switch(level)
+            {
+                case 3: return (950 - Elo);
+                case 4: return (1100 - Elo);
+                case 5: return (1250 - Elo);
+                case 6: return (1400 - Elo);
+                case 7: return (1550 - Elo);
+                case 8: return (1700 - Elo);
+                case 9: return (1850 - Elo);
+                default: return (800 - Elo);
             }
         }
 

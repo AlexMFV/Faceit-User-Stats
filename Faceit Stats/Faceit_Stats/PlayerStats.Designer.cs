@@ -40,10 +40,15 @@
             this.lblPlayerLevel = new System.Windows.Forms.Label();
             this.prgLevel = new Bunifu.Framework.UI.BunifuCircleProgressbar();
             this.btnRegion = new Bunifu.Framework.UI.BunifuImageButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnGlobalFlag = new Bunifu.Framework.UI.BunifuImageButton();
             this.lblCountryRank = new System.Windows.Forms.Label();
             this.lblRegionRank = new System.Windows.Forms.Label();
+            this.lblPlayerELO = new System.Windows.Forms.Label();
+            this.lblNextLevel = new System.Windows.Forms.Label();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.prgElo = new MetroFramework.Controls.MetroProgressBar();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -210,15 +215,6 @@
             this.btnRegion.TabStop = false;
             this.btnRegion.Zoom = 10;
             // 
-            // label1
-            // 
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(223, 185);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(560, 323);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Tests";
-            // 
             // btnGlobalFlag
             // 
             this.btnGlobalFlag.Image = ((System.Drawing.Image)(resources.GetObject("btnGlobalFlag.Image")));
@@ -253,6 +249,66 @@
             this.lblRegionRank.Text = "Region Rank";
             this.lblRegionRank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblPlayerELO
+            // 
+            this.lblPlayerELO.AutoSize = true;
+            this.lblPlayerELO.Font = new System.Drawing.Font("Fragma", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerELO.ForeColor = System.Drawing.Color.White;
+            this.lblPlayerELO.Location = new System.Drawing.Point(244, 204);
+            this.lblPlayerELO.Name = "lblPlayerELO";
+            this.lblPlayerELO.Size = new System.Drawing.Size(241, 28);
+            this.lblPlayerELO.TabIndex = 9;
+            this.lblPlayerELO.Text = "WXX\'s Elo is <Elo Value>";
+            // 
+            // lblNextLevel
+            // 
+            this.lblNextLevel.AutoSize = true;
+            this.lblNextLevel.Font = new System.Drawing.Font("Fragma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNextLevel.ForeColor = System.Drawing.Color.White;
+            this.lblNextLevel.Location = new System.Drawing.Point(247, 239);
+            this.lblNextLevel.Name = "lblNextLevel";
+            this.lblNextLevel.Size = new System.Drawing.Size(257, 15);
+            this.lblNextLevel.TabIndex = 10;
+            this.lblNextLevel.Text = "To reach level <nextlevel> you need X more points";
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape2,
+            this.lineShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(795, 517);
+            this.shapeContainer1.TabIndex = 11;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // lineShape2
+            // 
+            this.lineShape2.Name = "lineShape2";
+            this.lineShape2.X1 = 421;
+            this.lineShape2.X2 = 421;
+            this.lineShape2.Y1 = 279;
+            this.lineShape2.Y2 = 341;
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 394;
+            this.lineShape1.X2 = 394;
+            this.lineShape1.Y1 = 279;
+            this.lineShape1.Y2 = 341;
+            // 
+            // prgElo
+            // 
+            this.prgElo.Location = new System.Drawing.Point(250, 258);
+            this.prgElo.Maximum = 2200;
+            this.prgElo.Name = "prgElo";
+            this.prgElo.Size = new System.Drawing.Size(518, 23);
+            this.prgElo.Style = MetroFramework.MetroColorStyle.Orange;
+            this.prgElo.TabIndex = 12;
+            this.prgElo.Value = 800;
+            // 
             // PlayerStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,15 +316,18 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(795, 517);
+            this.Controls.Add(this.prgElo);
+            this.Controls.Add(this.lblNextLevel);
+            this.Controls.Add(this.lblPlayerELO);
             this.Controls.Add(this.lblRegionRank);
             this.Controls.Add(this.lblCountryRank);
             this.Controls.Add(this.btnGlobalFlag);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRegion);
             this.Controls.Add(this.lblPlayerLevel);
             this.Controls.Add(this.pnlSideBar);
             this.Controls.Add(this.pnlTopBar);
             this.Controls.Add(this.prgLevel);
+            this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PlayerStats";
@@ -287,6 +346,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnRegion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGlobalFlag)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -303,9 +363,14 @@
         private System.Windows.Forms.Label lblPlayerLevel;
         private Bunifu.Framework.UI.BunifuCircleProgressbar prgLevel;
         private Bunifu.Framework.UI.BunifuImageButton btnRegion;
-        private System.Windows.Forms.Label label1;
         private Bunifu.Framework.UI.BunifuImageButton btnGlobalFlag;
         private System.Windows.Forms.Label lblCountryRank;
         private System.Windows.Forms.Label lblRegionRank;
+        private System.Windows.Forms.Label lblPlayerELO;
+        private System.Windows.Forms.Label lblNextLevel;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private MetroFramework.Controls.MetroProgressBar prgElo;
     }
 }

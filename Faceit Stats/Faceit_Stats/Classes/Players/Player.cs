@@ -238,7 +238,10 @@ namespace Faceit_Stats
                         InGameName = (string)root.Value;
 
                     if (root.Key == "country")
+                    {
                         Country = root.Value.ToString().ToUpper();
+                        Flag = GetPlayerImage(PR.FlagURL + Country + ".png");
+                    }
 
                     if (root.Key == "games" && root.Value.Count() != 0)
                     {
