@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlayerStats));
             this.pnlTopBar = new System.Windows.Forms.Panel();
             this.btnLogout = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btnRefresh = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnLogo = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnClose = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnMinimize = new Bunifu.Framework.UI.BunifuImageButton();
@@ -69,6 +70,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
@@ -83,6 +85,7 @@
             // 
             this.pnlTopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.pnlTopBar.Controls.Add(this.btnLogout);
+            this.pnlTopBar.Controls.Add(this.btnRefresh);
             this.pnlTopBar.Controls.Add(this.btnLogo);
             this.pnlTopBar.Controls.Add(this.btnClose);
             this.pnlTopBar.Controls.Add(this.btnMinimize);
@@ -97,22 +100,39 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogout.Image = global::Faceit_Stats.Properties.Resources.goback;
-            this.btnLogout.ImageActive = global::Faceit_Stats.Properties.Resources.goback;
-            this.btnLogout.InitialImage = global::Faceit_Stats.Properties.Resources.goback;
-            this.btnLogout.Location = new System.Drawing.Point(696, 6);
+            this.btnLogout.Image = global::Faceit_Stats.Properties.Resources.leftArrow;
+            this.btnLogout.ImageActive = global::Faceit_Stats.Properties.Resources.leftArrow;
+            this.btnLogout.Location = new System.Drawing.Point(680, 9);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(30, 18);
-            this.btnLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnLogout.TabIndex = 3;
+            this.btnLogout.Size = new System.Drawing.Size(23, 14);
+            this.btnLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnLogout.TabIndex = 23;
             this.btnLogout.TabStop = false;
             this.btnLogout.Zoom = 0;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.btnLogout.Click += new System.EventHandler(this.bunifuImageButton1_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.Image = global::Faceit_Stats.Properties.Resources.goback;
+            this.btnRefresh.ImageActive = global::Faceit_Stats.Properties.Resources.goback;
+            this.btnRefresh.InitialImage = global::Faceit_Stats.Properties.Resources.goback;
+            this.btnRefresh.Location = new System.Drawing.Point(706, 6);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(20, 18);
+            this.btnRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.TabStop = false;
+            this.btnRefresh.Zoom = 0;
+            this.btnRefresh.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // btnLogo
             // 
+            this.btnLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnLogo.Image = ((System.Drawing.Image)(resources.GetObject("btnLogo.Image")));
             this.btnLogo.ImageActive = null;
             this.btnLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("btnLogo.InitialImage")));
@@ -127,6 +147,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Image = global::Faceit_Stats.Properties.Resources.close;
@@ -143,6 +164,7 @@
             // 
             // btnMinimize
             // 
+            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMinimize.Image = global::Faceit_Stats.Properties.Resources.Minimize;
             this.btnMinimize.ImageActive = global::Faceit_Stats.Properties.Resources.Minimize;
@@ -170,6 +192,7 @@
             // 
             // btnFlag
             // 
+            this.btnFlag.BackColor = System.Drawing.Color.Transparent;
             this.btnFlag.Image = ((System.Drawing.Image)(resources.GetObject("btnFlag.Image")));
             this.btnFlag.ImageActive = null;
             this.btnFlag.Location = new System.Drawing.Point(133, 26);
@@ -182,9 +205,9 @@
             // 
             // lblIGN
             // 
-            this.lblIGN.Font = new System.Drawing.Font("Fragma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIGN.Font = new System.Drawing.Font("Fragma", 15F);
             this.lblIGN.ForeColor = System.Drawing.Color.White;
-            this.lblIGN.Location = new System.Drawing.Point(0, 141);
+            this.lblIGN.Location = new System.Drawing.Point(1, 141);
             this.lblIGN.Name = "lblIGN";
             this.lblIGN.Size = new System.Drawing.Size(216, 28);
             this.lblIGN.TabIndex = 1;
@@ -193,6 +216,7 @@
             // 
             // btnPImage
             // 
+            this.btnPImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(29)))));
             this.btnPImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPImage.Image = ((System.Drawing.Image)(resources.GetObject("btnPImage.Image")));
@@ -208,9 +232,9 @@
             // 
             // lblPlayerLevel
             // 
-            this.lblPlayerLevel.Font = new System.Drawing.Font("Fragma", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerLevel.Font = new System.Drawing.Font("Fragma", 35F);
             this.lblPlayerLevel.ForeColor = System.Drawing.Color.White;
-            this.lblPlayerLevel.Location = new System.Drawing.Point(285, 87);
+            this.lblPlayerLevel.Location = new System.Drawing.Point(285, 86);
             this.lblPlayerLevel.Name = "lblPlayerLevel";
             this.lblPlayerLevel.Size = new System.Drawing.Size(79, 43);
             this.lblPlayerLevel.TabIndex = 2;
@@ -241,6 +265,7 @@
             // 
             // btnRegion
             // 
+            this.btnRegion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.btnRegion.Image = ((System.Drawing.Image)(resources.GetObject("btnRegion.Image")));
             this.btnRegion.ImageActive = null;
             this.btnRegion.Location = new System.Drawing.Point(427, 75);
@@ -253,6 +278,7 @@
             // 
             // btnGlobalFlag
             // 
+            this.btnGlobalFlag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.btnGlobalFlag.Image = ((System.Drawing.Image)(resources.GetObject("btnGlobalFlag.Image")));
             this.btnGlobalFlag.ImageActive = null;
             this.btnGlobalFlag.Location = new System.Drawing.Point(427, 125);
@@ -265,7 +291,7 @@
             // 
             // lblCountryRank
             // 
-            this.lblCountryRank.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountryRank.Font = new System.Drawing.Font("Fragma", 12.75F);
             this.lblCountryRank.ForeColor = System.Drawing.Color.White;
             this.lblCountryRank.Location = new System.Drawing.Point(463, 70);
             this.lblCountryRank.Name = "lblCountryRank";
@@ -276,7 +302,7 @@
             // 
             // lblRegionRank
             // 
-            this.lblRegionRank.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegionRank.Font = new System.Drawing.Font("Fragma", 12.75F);
             this.lblRegionRank.ForeColor = System.Drawing.Color.White;
             this.lblRegionRank.Location = new System.Drawing.Point(463, 121);
             this.lblRegionRank.Name = "lblRegionRank";
@@ -288,22 +314,22 @@
             // lblPlayerELO
             // 
             this.lblPlayerELO.AutoSize = true;
-            this.lblPlayerELO.Font = new System.Drawing.Font("Fragma", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerELO.Font = new System.Drawing.Font("Fragma", 20.25F);
             this.lblPlayerELO.ForeColor = System.Drawing.Color.White;
             this.lblPlayerELO.Location = new System.Drawing.Point(244, 204);
             this.lblPlayerELO.Name = "lblPlayerELO";
-            this.lblPlayerELO.Size = new System.Drawing.Size(241, 28);
+            this.lblPlayerELO.Size = new System.Drawing.Size(251, 29);
             this.lblPlayerELO.TabIndex = 9;
             this.lblPlayerELO.Text = "WXX\'s Elo is <Elo Value>";
             // 
             // lblNextLevel
             // 
             this.lblNextLevel.AutoSize = true;
-            this.lblNextLevel.Font = new System.Drawing.Font("Fragma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNextLevel.Font = new System.Drawing.Font("Fragma", 9.75F);
             this.lblNextLevel.ForeColor = System.Drawing.Color.White;
             this.lblNextLevel.Location = new System.Drawing.Point(247, 239);
             this.lblNextLevel.Name = "lblNextLevel";
-            this.lblNextLevel.Size = new System.Drawing.Size(257, 15);
+            this.lblNextLevel.Size = new System.Drawing.Size(257, 14);
             this.lblNextLevel.TabIndex = 10;
             this.lblNextLevel.Text = "To reach level <nextlevel> you need X more points";
             // 
@@ -428,18 +454,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(333, 283);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 19);
+            this.label1.Size = new System.Drawing.Size(15, 19);
             this.label1.TabIndex = 13;
             this.label1.Text = "1";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(446, 283);
             this.label2.Name = "label2";
@@ -450,7 +476,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(482, 283);
             this.label3.Name = "label3";
@@ -461,7 +487,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(517, 283);
             this.label4.Name = "label4";
@@ -472,7 +498,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(552, 283);
             this.label5.Name = "label5";
@@ -483,7 +509,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(587, 283);
             this.label6.Name = "label6";
@@ -494,7 +520,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(623, 283);
             this.label7.Name = "label7";
@@ -505,7 +531,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(658, 283);
             this.label8.Name = "label8";
@@ -516,7 +542,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(693, 283);
             this.label9.Name = "label9";
@@ -527,11 +553,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(732, 282);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(23, 19);
+            this.label10.Size = new System.Drawing.Size(24, 19);
             this.label10.TabIndex = 22;
             this.label10.Text = "10";
             // 
@@ -574,6 +600,7 @@
             this.pnlTopBar.ResumeLayout(false);
             this.pnlTopBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).EndInit();
@@ -626,6 +653,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private Bunifu.Framework.UI.BunifuImageButton btnRefresh;
         private Bunifu.Framework.UI.BunifuImageButton btnLogout;
     }
 }

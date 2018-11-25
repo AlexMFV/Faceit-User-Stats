@@ -45,12 +45,12 @@
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Fragma", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.Font = new System.Drawing.Font("Fragma", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUser.ForeColor = System.Drawing.Color.White;
             this.lblUser.Location = new System.Drawing.Point(14, 53);
             this.lblUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(99, 19);
+            this.lblUser.Size = new System.Drawing.Size(94, 19);
             this.lblUser.TabIndex = 0;
             this.lblUser.Text = "Faceit User:";
             // 
@@ -61,14 +61,12 @@
             this.txtUser.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtUser.BorderColorMouseHover = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtUser.BorderThickness = 1;
-            this.txtUser.characterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtUser.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUser.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.ForeColor = System.Drawing.Color.White;
             this.txtUser.isPassword = false;
             this.txtUser.Location = new System.Drawing.Point(116, 47);
             this.txtUser.Margin = new System.Windows.Forms.Padding(5);
-            this.txtUser.MaxLength = 32767;
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(227, 31);
             this.txtUser.TabIndex = 1;
@@ -91,13 +89,14 @@
             // 
             // btnLogo
             // 
+            this.btnLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnLogo.Image = ((System.Drawing.Image)(resources.GetObject("btnLogo.Image")));
             this.btnLogo.ImageActive = null;
             this.btnLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("btnLogo.InitialImage")));
             this.btnLogo.Location = new System.Drawing.Point(0, 0);
             this.btnLogo.Name = "btnLogo";
-            this.btnLogo.Size = new System.Drawing.Size(34, 30);
-            this.btnLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnLogo.Size = new System.Drawing.Size(30, 29);
+            this.btnLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnLogo.TabIndex = 1;
             this.btnLogo.TabStop = false;
             this.btnLogo.Zoom = 10;
@@ -105,6 +104,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Image = global::Faceit_Stats.Properties.Resources.close;
@@ -121,6 +121,7 @@
             // 
             // btnMinimize
             // 
+            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMinimize.Image = global::Faceit_Stats.Properties.Resources.Minimize;
             this.btnMinimize.ImageActive = global::Faceit_Stats.Properties.Resources.Minimize;
@@ -154,7 +155,7 @@
             // Form1
             // 
             this.AcceptButton = this.btnConnect;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(363, 145);
@@ -162,7 +163,7 @@
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.lblUser);
-            this.Font = new System.Drawing.Font("Fragma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -184,10 +185,10 @@
         private System.Windows.Forms.Label lblUser;
         private Bunifu.Framework.UI.BunifuMetroTextbox txtUser;
         private System.Windows.Forms.Button btnConnect;
-        private Bunifu.Framework.UI.BunifuImageButton btnLogo;
         private System.Windows.Forms.Panel pnlTopBar;
         private Bunifu.Framework.UI.BunifuImageButton btnClose;
         private Bunifu.Framework.UI.BunifuImageButton btnMinimize;
+        private Bunifu.Framework.UI.BunifuImageButton btnLogo;
     }
 }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,22 @@ namespace Faceit_Stats
 
         public Form1()
         {
+            string fontName = "Fragma";
+            float fontSize = 12;
+
+            using (Font fontTester = new Font(
+                    fontName,
+                    fontSize,
+                    FontStyle.Regular,
+                    GraphicsUnit.Pixel))
+            {
+                if (fontTester.Name != fontName)
+                {
+                    MessageBox.Show("Installing Fragma font to prevent Font Errors!", "Font Checker", MessageBoxButtons.OK);
+                    //Install Font Fragma
+                    Process.Start("Fragma.ttf");
+                }
+            }
             InitializeComponent();
         }
 

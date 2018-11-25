@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -185,6 +186,21 @@ namespace Faceit_Stats
             this.Show();
             SplashScreen.CloseSplashScreen();
             this.Activate();
+        }
+
+        private void bunifuImageButton1_Click(object sender, EventArgs e)
+        {
+            //NEEDS FIXING: EXIT THE PLAYERSTATS FORM THEN OPEN THE SPLASHSCREEN AND OPEN THE ENTER PLAYER USERNAME
+            //this.Hide();
+            //PlayerStats active = this;
+            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            //splashthread.IsBackground = true;
+            //splashthread.Start();
+            //LoadForm(Username);
+            //Form1 form = new Form1();
+            //form.Show();
+            //SplashScreen.CloseSplashScreen();
+            //form.Activate();
         }
     }
 }
