@@ -1,0 +1,25 @@
+{
+  "name": "faceit-user-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexMFV/Faceit-User-Stats.git"
+  },
+  "author": "AlexMFV",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexMFV/Faceit-User-Stats/issues"
+  },
+  "homepage": "https://github.com/AlexMFV/Faceit-User-Stats#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "pg": "^7.15.1"
+  }
+}
