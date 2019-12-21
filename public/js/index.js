@@ -1,15 +1,23 @@
 //Adding event handlers
-document.getElementById('btnSearch').addEventListener('click', searchUser);
+document.getElementById('btnSearch').addEventListener('click', getUserData);
 
-//window.onload = () => {};
+function getUserData() {
+  const user = document.getElementById('steamId').value;
 
-function searchUser() {
-  const elem = document.getElementById('steamId');
-  console.log("Searching for user: " + elem.value);
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+  };
+
+  const data = requestUserData('/api/playerData', options);
+  console.log(data);
 }
 
-async function requestData(type) {
-  const response = await fetch(type, {})
+async function requestUserData(dir, options) {
+  const response = await fetch(dir, options)
     .then((response) => {return response.json();});
-    console.log(response);
+    return response;
 }
