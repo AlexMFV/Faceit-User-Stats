@@ -1,23 +1,24 @@
 //Adding event handlers
 document.getElementById('btnSearch').addEventListener('click', getUserData);
 
-function getUserData() {
+async function getUserData() {
   const user = document.getElementById('steamId').value;
 
+  const data = { user };
   const options = {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(data)
   };
 
-  const data = requestUserData('/api/playerData', options);
-  console.log(data);
+  const playerData = await requestData('/api/playerData', options);
+  console.log(playerData); // DEBUG: 
 }
 
-async function requestUserData(dir, options) {
+async function requestData(dir, options) {
   const response = await fetch(dir, options)
-    .then((response) => {return response.json();});
+    .then((response) => { return response.json(); });
     return response;
 }

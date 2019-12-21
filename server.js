@@ -1,18 +1,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const ejs = require('ejs');
 const pg = require('pg');
-const https = require('https');
 const fs = require('fs');
-const request = require('request');
+const fetch = require('node-fetch');
 
 const api_key = fs.readFileSync('apikey.txt').toString('utf8');
 const packet = {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + api_key
+    'Authorization': ("Bearer " + api_key)
   }
 };
 
@@ -31,21 +29,21 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-app.get('/api/playerData', getPlayerData);
+/* GET REQUESTS */
+
+/* POST REQUESTS */
+app.post('/api/playerData', getPlayerData);
 
 app.listen(8080);
 console.log("Server listening on port 8080!");
 
-function getPlayerData(req, res){
-  try{
-    let value;
-    const final = request(strPlayerData.replace('<usr>', req.body.user), { json: true }, (err, res, body) => {
-      if (err) { return console.log(err); }
-      console.log(body);
-      value = body;
-      return body;
-    });
+/* SERVER METHODS */
 
+async function getPlayerData(req, res){
+  try{
+    const value = await fetch(strPlayerData.replace('<usr>', req.body.user), packet).then((res) => {
+      return res.json();
+    });
     res.json(value);
   }
   catch(e){
