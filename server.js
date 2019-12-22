@@ -32,7 +32,7 @@ app.get('/', function(req, res){
 /* GET REQUESTS */
 
 /* POST REQUESTS */
-app.post('/api/playerData', getPlayerData);
+app.get('/api/player/:id', getPlayerData);
 
 app.listen(8080);
 console.log("Server listening on port 8080!");
@@ -40,10 +40,10 @@ console.log("Server listening on port 8080!");
 /* SERVER METHODS */
 
 async function getPlayerData(req, res){
+  let value;
   try{
-    const value = await fetch(strPlayerData.replace('<usr>', req.body.user), packet).then((res) => {
-      return res.json();
-    });
+    const user = req.params.id;
+    value = await fetch(strPlayerData.replace('<usr>', user), packet).then((res) => { return res.json(); });
     res.json(value);
   }
   catch(e){

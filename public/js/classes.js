@@ -1,5 +1,9 @@
 class Player{
-  constructor(data){
+  constructor(){
+
+  }
+
+  fillData(data){
     this.playerId = data.player_id;
     this.steamId = data.platforms.steam;
     this.steamId3 = data.new_steam_id;
@@ -8,11 +12,11 @@ class Player{
     this.country = data.country;
     this.avatarUrl = data.avatar;
     this.infractions = {
-      this.lastInfraction = data.infractions.last_infraction_date;
-      this.afk = data.infractions.afk;
-      this.leaver = data.infractions.leaver;
-      this.noCheckIn = data.infractions.qm_not_checkedin;
-      this.noVote = data.infractions.qm_not_voted;
+      lastInfraction: data.infractions.last_infraction_date,
+      afk: data.infractions.afk,
+      leaver: data.infractions.leaver,
+      noCheckIn: data.infractions.qm_not_checkedin,
+      noVote: data.infractions.qm_not_voted
     },
     this.games = data.games;
     this.language = data.settings.language;
@@ -20,5 +24,10 @@ class Player{
     this.bans = data.bans;
     this.membership = data.membership_type;
     this.faceitUrl = data.faceit_url;
+  }
+
+  error(error, type){
+    this.error = type;
+    this.message = error;
   }
 }
