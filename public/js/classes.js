@@ -24,6 +24,7 @@ class Player{
     this.bans = data.bans;
     this.membership = data.membership_type;
     this.faceitUrl = data.faceit_url;
+    this.matches = [];
   }
 
   error(error, type){

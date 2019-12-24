@@ -63,6 +63,11 @@ async function createElements(player){
   nick.innerHTML = player.nickname;
   col.push(nick);
 
+  //Player id
+  const pId = document.createElement('p');
+  pId.innerText = "Player ID: " + player.playerId;
+  col.push(pId);
+
   //Player Profile
   let btnWrapper = document.createElement('a');
   btnWrapper.href = player.faceitUrl.replace('{lang}', 'en');
@@ -87,11 +92,21 @@ async function createElements(player){
   col.push(ranking);
   col.push(country);
 
-
   //Membership
   const memb = document.createElement('p');
   memb.innerText = "Membership: " + player.membership;
   col.push(memb);
+
+  //SteamIDs
+  const steamId = document.createElement('p');
+  const steamId3 = document.createElement('p');
+  const steamId64 = document.createElement('p');
+  steamId.innerText = "Steam ID: " + player.steamId;
+  steamId3.innerText = "Steam ID3: " + player.steamId3;
+  steamId64.innerText = "Steam ID64: " + player.steamId64;
+  col.push(steamId);
+  col.push(steamId3);
+  col.push(steamId64);
 
   col.forEach(item => {
     window.mainContainer.appendChild(item);
