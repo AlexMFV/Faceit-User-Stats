@@ -14,6 +14,14 @@ window.addEventListener('DOMContentLoaded', async function(){
 
 async function processPlayerData(){
   const user = new URLSearchParams(window.location.search).get('id');
+  const game = new URLSearchParams(window.location.search).get('game');
+
+  //if(game == null)
+    //console.log("Redirect to index.js and show error");
+
+  //if(!game in json)
+    //console.log("Show user first game in list and show error \"Game not present on user profile\"");
+
   const json = await requestData('/api/player/'+ user, {method: "GET"});
   let player = new Player();
 
