@@ -3,6 +3,13 @@ class Player{
 
   }
 
+  fillRanking(data){
+    this.countryPosition = data.countryPos;
+    this.regionPosition = data.regionPos;
+    this.elo = data.elo;
+    this.level = data.game_level;
+  }
+
   fillData(data){
     this.playerId = data.player_id;
     this.steamId = data.platforms.steam;
@@ -31,4 +38,8 @@ class Player{
     this.error = type;
     this.message = error;
   }
+}
+
+class Match{
+
 }

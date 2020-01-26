@@ -9,7 +9,9 @@
 
 window.addEventListener('DOMContentLoaded', async function(){
   const player = await processPlayerData();
-  const what = await fillPlayerData(player);
+  const pRanking = await processPlayerRanking(player);
+
+  const playerExists = await fillPlayerData(player); // Return false if the user does not exist
 });
 
 async function processPlayerData(){
@@ -22,21 +24,19 @@ async function processPlayerData(){
   //if(!game in json)
     //console.log("Show user first game in list and show error \"Game not present on user profile\"");
 
-  const json = await requestData('/api/player/'+ user, {method: "GET"});
+  const jsonData = await requestData('/api/player/'+ user, {method: "GET"});
   let player = new Player();
 
-  if("errors" in json)
+  if("errors" in jsonData)
     player = null;
   else
-    player.fillData(json);
+    player.fillData(jsonData);
 
   return player;
 }
 
-async function requestData(dir, options) {
-  const response = await fetch(dir, options)
-    .then((response) => { return response.json(); });
-    return response;
+async function processPlayerRanking(){
+
 }
 
 async function fillPlayerData(player){
@@ -113,4 +113,10 @@ async function createElements(player){
   });
 
   //Get all player matches
+}
+
+async function requestData(dir, options) {
+  const response = await fetch(dir, options)
+    .then((response) => { return response.json(); });
+    return response;
 }

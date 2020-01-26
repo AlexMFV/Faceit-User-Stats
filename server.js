@@ -29,10 +29,11 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-/* GET REQUESTS */
-
 /* POST REQUESTS */
+
+/* GET REQUESTS */
 app.get('/api/player/:id', getPlayerData);
+app.get('/api/ranking/:id', getPlayerRanking);
 
 app.listen(8080);
 console.log("Server listening on port 8080!");
@@ -43,6 +44,19 @@ async function getPlayerData(req, res){
   let value;
   try{
     const user = req.params.id;
+    value = await fetch(strPlayerData.replace('<usr>', user), packet).then((res) => { return res.json(); });
+    res.json(value);
+  }
+  catch(e){
+    error(res, e);
+  }
+}
+
+async function getPlayerRanking(req, res){
+  let value;
+  try{
+    const user = req.params.id;
+    //Get Regional and Country Rank
     value = await fetch(strPlayerData.replace('<usr>', user), packet).then((res) => { return res.json(); });
     res.json(value);
   }
