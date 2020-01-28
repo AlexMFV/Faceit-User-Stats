@@ -15,7 +15,10 @@ const packet = {
 };
 
 /* API URL CONSTANTS */
-const strPlayerData = "https://open.faceit.com/data/v4/players?nickname=<usr>";
+const faceitUrl = "https://open.faceit.com/data/v4/";
+const strPlayerData = "players?nickname=<usr>";
+const strPlayerRanking = "rankings/games/<game>/regions/<region>/players/<usrId>?country=<country>&limit=2";
+const strPlayerRegional = "rankings/games/<game>/regions/<region>/players/<usrId>?limit=2";
 
 //Set the visible folders for the server
 app.use(express.static(path.join(__dirname, 'public')));
@@ -33,7 +36,7 @@ app.get('/', function(req, res){
 
 /* GET REQUESTS */
 app.get('/api/player/:id', getPlayerData);
-app.get('/api/ranking/:id', getPlayerRanking);
+app.get('/api/ranking/:player', getPlayerRanking);
 
 app.listen(8080);
 console.log("Server listening on port 8080!");
@@ -44,7 +47,8 @@ async function getPlayerData(req, res){
   let value;
   try{
     const user = req.params.id;
-    value = await fetch(strPlayerData.replace('<usr>', user), packet).then((res) => { return res.json(); });
+
+    value = await fetch(faceitUrl + strPlayerData.replace('<usr>', user), packet).then((res) => { return res.json(); });
     res.json(value);
   }
   catch(e){
@@ -55,9 +59,25 @@ async function getPlayerData(req, res){
 async function getPlayerRanking(req, res){
   let value;
   try{
-    const user = req.params.id;
+    const player = JSON.parse(req.params.player);
+    const userId = player.id;
+    const gameId = player.game;
+    const region = player.region;
+    const country = player.country;
     //Get Regional and Country Rank
-    value = await fetch(strPlayerData.replace('<usr>', user), packet).then((res) => { return res.json(); });
+
+    value = await fetch(faceitUrl + strPlayerRanking
+      .replace('<usrId>', userId)
+      .replace('<game>', gameId)
+      .replace('<region>', region)
+      .replace('<country>', country), packet).then((res) => { return res.json(); });
+
+    regional = await fetch(faceitUrl + strPlayerRegional
+      .replace('<usrId>', userId)
+      .replace('<game>', gameId)
+      .replace('<region>', region), packet).then((res) => { return res.json(); });
+
+    value.regionPos = regional.position;
     res.json(value);
   }
   catch(e){

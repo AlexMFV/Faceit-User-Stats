@@ -7,17 +7,17 @@
 //  let someData = await GetData;
 //});
 
+const user = new URLSearchParams(window.location.search).get('id');
+const game = new URLSearchParams(window.location.search).get('game');
+
 window.addEventListener('DOMContentLoaded', async function(){
-  const player = await processPlayerData();
-  const pRanking = await processPlayerRanking(player);
+  let player = await processPlayerData();
+  player = await processPlayerRanking(player);
 
   const playerExists = await fillPlayerData(player); // Return false if the user does not exist
 });
 
 async function processPlayerData(){
-  const user = new URLSearchParams(window.location.search).get('id');
-  const game = new URLSearchParams(window.location.search).get('game');
-
   //if(game == null)
     //console.log("Redirect to index.js and show error");
 
@@ -35,8 +35,22 @@ async function processPlayerData(){
   return player;
 }
 
-async function processPlayerRanking(){
+async function processPlayerRanking(player){
+  const playerInfo = {
+    id: player.playerId,
+    game: game,
+    region: player.games[game].region, //Change this to be dynamic
+    country: player.country
+  };
 
+  const data = JSON.stringify(playerInfo);
+  console.log(data);
+
+  const rankingData = await requestData('/api/ranking/' + data, {method: "GET"});
+  console.log(rankingData);
+  player.fillRanking(rankingData);
+
+  return player;
 }
 
 async function fillPlayerData(player){
@@ -85,12 +99,15 @@ async function createElements(player){
   col.push(btnWrapper);
 
   //Country
-  const ranking = document.createElement('a');
-  ranking.innerHTML = "Global Ranking [" + 3932012 + "]";
-  const country = document.createElement('img');
-  country.src = "https://www.countryflags.io/" + player.country + "/shiny/48.png";
+  const ranking = document.createElement('p');
+  ranking.innerHTML = "Global Ranking [" + player.regionPosition + "]";
+  const country = document.createElement('p');
+  country.innerHTML = "International Ranking [" + player.countryPosition + "]";
+  const flag = document.createElement('img');
+  flag.src = "https://www.countryflags.io/" + player.country + "/shiny/48.png";
   col.push(ranking);
   col.push(country);
+  col.push(flag);
 
   //Membership
   const memb = document.createElement('p');
