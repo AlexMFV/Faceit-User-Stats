@@ -101,13 +101,16 @@ async function createElements(player){
   //Country
   const ranking = document.createElement('p');
   ranking.innerHTML = "Global Ranking [" + player.regionPosition + "]";
+
   const country = document.createElement('p');
+  country.classList.add("ranking");
   country.innerHTML = "International Ranking [" + player.countryPosition + "]";
   const flag = document.createElement('img');
-  flag.src = "https://www.countryflags.io/" + player.country + "/shiny/48.png";
+  flag.src = "https://www.countryflags.io/" + player.country + "/flat/32.png"; //shiny
+  country.appendChild(flag);
+
   col.push(ranking);
   col.push(country);
-  col.push(flag);
 
   //Membership
   const memb = document.createElement('p');
