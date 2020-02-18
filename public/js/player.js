@@ -1,3 +1,5 @@
+/*Alexandre Valente*/
+
 //const GetData = fetch('/api/player/AlexMFV', {method: "GET"}).then(r=>r.json()).then(data => {
 //    fillPlayerData();
 //    return data;
