@@ -68,29 +68,46 @@ async function createElements(player){
   console.log(player);
   const col = [];
 
+  //Create Profile Container
+  const profileContainer = document.createElement('div');
+  profileContainer.classList.add('profile-container');
+  col.push(profileContainer);
+
+  //Avatar Container
+  const avatarContainer = document.createElement('div');
+  avatarContainer.classList.add('avatar-container');
+
   //Avatar of the player
   const avatar = document.createElement('img');
   avatar.src = player.avatarUrl;
   avatar.classList.add('avatar');
-  col.push(avatar);
+  avatarContainer.appendChild(avatar);
+  profileContainer.appendChild(avatarContainer);
+
+  //Profile Information Container
+  const profileInfoContainer = document.createElement('div');
+  profileInfoContainer.classList.add('profile-info-container');
+  profileContainer.appendChild(profileInfoContainer);
 
   //Nickname
   const nick = document.createElement('h2');
   nick.innerHTML = player.nickname;
-  col.push(nick);
+  nick.classList.add('player-nickname');
+  profileInfoContainer.appendChild(nick);
 
   //Player id
   const pId = document.createElement('p');
   pId.innerText = "Player ID: " + player.playerId;
-  col.push(pId);
+  profileInfoContainer.appendChild(pId);
 
   //Player Profile
   let btnWrapper = document.createElement('a');
   btnWrapper.href = player.faceitUrl.replace('{lang}', 'en');
+
   const faceitProfile = document.createElement('button');
   faceitProfile.innerText = "Faceit Profile";
   btnWrapper.appendChild(faceitProfile);
-  col.push(btnWrapper);
+  profileInfoContainer.appendChild(btnWrapper);
 
   //Steam Button
   btnWrapper = document.createElement('a');
@@ -98,7 +115,7 @@ async function createElements(player){
   const steamProfile = document.createElement('button');
   steamProfile.innerText = "Steam Profile";
   btnWrapper.appendChild(steamProfile);
-  col.push(btnWrapper);
+  profileInfoContainer.appendChild(btnWrapper);
 
   //Country
   const ranking = document.createElement('p');
@@ -111,8 +128,8 @@ async function createElements(player){
   flag.src = "https://www.countryflags.io/" + player.country + "/flat/32.png"; //shiny
   country.appendChild(flag);
 
-  col.push(ranking);
-  col.push(country);
+  profileInfoContainer.appendChild(ranking);
+  profileInfoContainer.appendChild(country);
 
   //Membership
   const memb = document.createElement('p');
