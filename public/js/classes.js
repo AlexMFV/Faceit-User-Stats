@@ -6,10 +6,13 @@ class Player{
   fillRanking(data){
     //Change this to the Game tab later
     console.log(data);
-    this.countryPosition = data.position;
-    this.regionPosition = data.regionPos;
-    this.elo = data.items[0].faceit_elo;
-    this.level = data.items[0].game_skill_level;
+
+
+      this.countryPosition = data.position;
+      this.regionPosition = data.regionPos;
+      this.elo = data.items[0].faceit_elo;
+      this.level = data.items[0].game_skill_level;
+    
   }
 
   fillData(data){
