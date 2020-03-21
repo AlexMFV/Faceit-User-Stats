@@ -19,6 +19,8 @@ const faceitUrl = "https://open.faceit.com/data/v4/";
 const strPlayerData = "players?nickname=<usr>";
 const strPlayerRanking = "rankings/games/<game>/regions/<region>/players/<usrId>?country=<country>&limit=2";
 const strPlayerRegional = "rankings/games/<game>/regions/<region>/players/<usrId>?limit=2";
+const strPlayerMatches = "players/<usrId>/history?game=<game>&from=<start>&to=<end>&offset=0&limit=15";
+const strMatchInfo = "matches/<matchId>/stats";
 
 //Set the visible folders for the server
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,6 +39,8 @@ app.get('/', function(req, res){
 /* GET REQUESTS */
 app.get('/api/player/:id', getPlayerData);
 app.get('/api/ranking/:player', getPlayerRanking);
+app.get('/api/player/matches/:player', getPlayerMatches);
+app.get('/api/player/match/:match', getMatchInfo);
 
 app.listen(8080);
 console.log("Server listening on port 8080!");
@@ -83,6 +87,50 @@ async function getPlayerRanking(req, res){
   catch(e){
     error(res, e);
   }
+}
+
+async function getPlayerMatches(req, res){
+  let value;
+  try{
+    const player = JSON.parse(req.params.player);
+    const userId = player.id;
+    const gameId = player.game;
+    const startDate = player.startDate;
+    const endDate = player.endDate;
+    //Get Matches
+
+    value = await fetch(faceitUrl + strPlayerMatches
+      .replace('<usrId>', userId)
+      .replace('<game>', gameId)
+      .replace('<start>', startDate)
+      .replace('<end>', endDate), packet).then((res) => { return res.json(); });
+
+    res.json(value);
+  }
+  catch(e){
+    error(res, e);
+  }
+}
+
+async function getMatchInfo(req, res){
+  let value;
+  try{
+    const match = JSON.parse(req.params.match);
+    const matchId = match.id;
+    //Get Match Info
+
+    value = await fetch(faceitUrl + strMatchInfo
+      .replace('<matchId>', matchId), packet).then((res) => { return res.json(); });
+
+    res.json(value);
+  }
+  catch(e){
+    error(res, e);
+  }
+}
+
+function Epoch(date) {
+    return Math.round(new Date(date).getTime() / 1000.0);
 }
 
 function error(res, msg) {

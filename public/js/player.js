@@ -14,6 +14,13 @@ window.addEventListener('DOMContentLoaded', async function(){
     let player = await processPlayerData();
     player = await processPlayerRanking(player);
 
+    let matches = await processPlayerMatches(player);
+    player.matches = matches.items;
+
+    for(let match = 0;match < player.matches.length;match++){
+      let matchInfo = await processMatchInfo(player.matches[match]);
+      player.matches[match].rounds = matchInfo;
+    }
     const playerExists = await fillPlayerData(player); // Return false if the user does not exist
 });
 
@@ -44,10 +51,8 @@ async function processPlayerRanking(player){
   };
 
   const data = JSON.stringify(playerInfo);
-  console.log(data);
 
   const rankingData = await requestData('/api/ranking/' + data, {method: "GET"});
-  console.log(rankingData);
   player.fillRanking(rankingData);
 
   return player;
@@ -62,7 +67,38 @@ async function fillPlayerData(player){
   return true;
 }
 
+async function processPlayerMatches(player){
+  const playerMatchesInfo = {
+    id: player.playerId,
+    game: game
+  };
+
+  const data = JSON.stringify(playerMatchesInfo);
+
+  const playerHistoricMatches = await requestData('/api/player/matches/' + data, {method: "GET"});
+
+  return playerHistoricMatches;
+}
+
+async function processMatchInfo(match){
+  const matchToData = {
+    id: match.match_id
+  };
+
+  const data = JSON.stringify(matchToData);
+
+  const matchInfo = await requestData('/api/player/match/' + data, {method: "GET"});
+
+  return matchInfo;
+}
+
 async function createElements(player){
+  const startDate = document.getElementsByName('startDate');
+  startDate.value = await Date.now();
+
+  const endDate = document.getElementsByName('startDate');
+  endDate.value = await Date.now();
+
   console.log(player);
   const col = [];
 
@@ -255,10 +291,93 @@ async function createElements(player){
   });
 
   //Get all player matches
+  createPlayerMatches(player);
+}
+
+async function createPlayerMatches(player){
+  const tableMatches = document.getElementById("table-matches");
+  const matchesRows = document.getElementById("matches-rows");
+
+  const playerId = player.playerId;
+  const matchesLength = player.matches.length - 1;
+
+  for (let i = matchesLength; i >= 0; i--){
+    let match = player.matches[i];
+
+    let playerTeam;
+    let factionWinner;
+
+    let isFac1 = match.teams.faction1.players.find(player => player.player_id == playerId);
+    if(isFac1 != null){
+      playerTeam = match.teams.faction1.nickname;
+      factionWinner = "faction1";
+    }
+    else {
+      playerTeam =   match.teams.faction2.nickname;
+      factionWinner = "faction2";
+    }
+
+    //RESULT
+    let row = matchesRows.insertRow(0);
+    let cellResult = row.insertCell(0);
+    let cellTextResult = document.createElement('span');
+    cellTextResult.innerHTML = match.results.winner == factionWinner ? "WIN" : "LOSE";
+    cellTextResult.classList.add("table-button");
+    cellTextResult.classList.add(match.results.winner == factionWinner ? "is-success" : "is-danger");
+    cellResult.appendChild(cellTextResult);
+
+    //TEAM NAME
+    let cellTeamName = row.insertCell(1);
+    cellTeamName.innerHTML = playerTeam;
+
+    //K-A-D
+    let cellKAD = row.insertCell(2);
+    let cellTextKAD = document.createElement('span');
+    let KAD;
+    isFac1 = match.rounds.rounds[0].teams[0].players.find(player => player.player_id == playerId);
+    if(isFac1 != null){
+      isFac1 = isFac1.player_stats;
+      KAD = isFac1.Kills+"-"+isFac1.Assists+"-"+isFac1.Deaths+" ("+isFac1["K/D Ratio"]+")";
+    }
+    else {
+      isFac1 = match.rounds.rounds[0].teams[1].players.find(player => player.player_id == playerId);
+      isFac1 = isFac1.player_stats;
+      KAD = isFac1.Kills+"-"+isFac1.Assists+"-"+isFac1.Deaths+" ("+isFac1["K/D Ratio"]+")";
+    }
+
+    cellTextKAD.classList.add("table-button");
+    cellTextKAD.classList.add(isFac1["K/D Ratio"] >= 1 ? "is-success" : "is-danger");
+    cellTextKAD.innerHTML = KAD;
+    cellKAD.appendChild(cellTextKAD);
+
+    //GAME SCORE
+    let cellScore = row.insertCell(3);
+    let cellTextScore = document.createElement('span');
+    cellTextScore.innerHTML = match.rounds.rounds[0].round_stats.Score;
+    cellTextScore.classList.add("table-button");
+    cellTextScore.classList.add("is-primary");
+    cellScore.appendChild(cellTextScore);
+
+    //MAP
+    let cellMap = row.insertCell(4);
+    cellMap.innerHTML = match.rounds.rounds[0].round_stats.Map;
+
+    //DATE
+    let cellDate = row.insertCell(5);
+    cellDate.innerHTML = EpochToDate(match.started_at);
+
+    //ELO POINTS
+    let cellElo = row.insertCell(6);
+    cellElo.innerHTML = "";
+  };
 }
 
 async function requestData(dir, options) {
   const response = await fetch(dir, options)
     .then((response) => { return response.json(); });
     return response;
+}
+
+function EpochToDate(epoch) {
+    return new Date(epoch * 1000.0).toLocaleString();
 }

@@ -159,3 +159,67 @@ body{
   background-color:#df6f0d;
   height: 30px;
 }
+
+.table-matches{
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: #fff;
+  color: #363636;
+  border: 1px solid #222;
+  margin: 10px 15% 0;
+  width: 70%;
+}
+
+.table-matches thead {
+  background-color: rgba(3,3,3,0.7511205165660014);
+  color: white;
+}
+
+.table-matches th {
+  text-align: left;
+  padding: 10px 0 10px 10px;
+}
+
+.table-matches th:first-child{
+    padding: 10px 0 10px 13px;
+}
+
+.table-matches td{
+  border: 1px solid #c8cdd0;
+  border-width: 0 0 1px;
+  padding: .75em .75em;
+  font-weight: 600;
+}
+
+.table-button{
+  height: 2.5em;
+  font-weight: 700;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: calc(.375em - 1px) calc(.625em - 1px);
+  position: relative;
+}
+
+.is-primary{
+  background-color: rgba(3,3,3,0.7511205165660014);
+  border-color: transparent;
+  color: #fff;
+  font-size: 12px;
+}
+
+.is-success{
+  background-color: #4bbf73;
+  border-color: transparent;
+  color: #fff;
+}
+
+.is-danger{
+  background-color: #d9534f;
+  border-color: transparent;
+  color: #fff;
+}
+
+.is-small{
+  border-radius: 0;
+  font-size: .75rem;
+}
