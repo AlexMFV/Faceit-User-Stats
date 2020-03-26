@@ -130,14 +130,14 @@ async function createElements(player){
   profileInfoContainer.appendChild(nick);
 
   //_blanck attr
-  let _blanckAttr = document.createAttribute("target");
-  _blanckAttr.value = "_blanck";
+  let _blankAttr = document.createAttribute("target");
+  _blankAttr.value = "_blank";
 
   //Player Profile
   let btnWrapper = document.createElement('a');
   btnWrapper.href = player.faceitUrl.replace('{lang}', 'en');
   btnWrapper.classList.add('faceit-btn-profile');
-  btnWrapper.setAttributeNode(_blanckAttr);
+  btnWrapper.setAttributeNode(_blankAttr);
 
   //Player id
   /*const pId = document.createElement('p');
@@ -222,7 +222,7 @@ async function createElements(player){
   faceitProfile.innerText = "Faceit Profile";
   faceitProfile.classList.add("player-btn");
   btnWrapper.appendChild(faceitProfile);
-  btnWrapper.setAttributeNode(_blanckAttr);
+  btnWrapper.setAttributeNode(_blankAttr);
 
   buttonsContainer.appendChild(btnWrapper);
 
@@ -231,9 +231,9 @@ async function createElements(player){
   btnWrapper.href = "http://steamcommunity.com/profiles/" + player.steamId64;
   btnWrapper.classList.add('steam-btn-profile');
 
-  _blanckAttr = document.createAttribute("target");
-  _blanckAttr.value = "_blanck";
-  btnWrapper.setAttributeNode(_blanckAttr);
+  _blankAttr = document.createAttribute("target");
+  _blankAttr.value = "_blank";
+  btnWrapper.setAttributeNode(_blankAttr);
 
   const steamProfile = document.createElement('button');
   steamProfile.innerText = "Steam Profile";
@@ -334,7 +334,9 @@ async function createPlayerMatches(player){
     let cellKAD = row.insertCell(2);
     let cellTextKAD = document.createElement('span');
     let KAD;
+
     isFac1 = match.rounds.rounds[0].teams[0].players.find(player => player.player_id == playerId);
+
     if(isFac1 != null){
       isFac1 = isFac1.player_stats;
       KAD = isFac1.Kills+"-"+isFac1.Assists+"-"+isFac1.Deaths+" ("+isFac1["K/D Ratio"]+")";
@@ -379,5 +381,5 @@ async function requestData(dir, options) {
 }
 
 function EpochToDate(epoch) {
-    return new Date(epoch * 1000.0).toLocaleString();
+    return new Date(epoch * 1000.0).toLocaleString().replace(',','');
 }
