@@ -1,12 +1,3 @@
-//const GetData = fetch('/api/player/AlexMFV', {method: "GET"}).then(r=>r.json()).then(data => {
-//    fillPlayerData();
-//    return data;
-//});
-//
-//$(document).ready(async () => {
-//  let someData = await GetData;
-//});
-
 const user = new URLSearchParams(window.location.search).get('id');
 const game = new URLSearchParams(window.location.search).get('game');
 
@@ -30,6 +21,7 @@ async function processPlayerData(){
 
   //if(!game in json)
     //console.log("Show user first game in list and show error \"Game not present on user profile\"");
+  ToggleLoading();
 
   const jsonData = await requestData('/api/player/'+ user, {method: "GET"});
   let player = new Player();
@@ -372,6 +364,8 @@ async function createPlayerMatches(player){
     let cellElo = row.insertCell(6);
     cellElo.innerHTML = "";
   };
+
+    ToggleLoading();
 }
 
 async function requestData(dir, options) {
@@ -382,4 +376,11 @@ async function requestData(dir, options) {
 
 function EpochToDate(epoch) {
     return new Date(epoch * 1000.0).toLocaleString().replace(',','');
+}
+
+function ToggleLoading(){
+  if($('body').find('.lds-background').is(":visible") == false)
+    $('body').find('.lds-background').show();
+  else
+    $('body').find('.lds-background').hide();
 }
