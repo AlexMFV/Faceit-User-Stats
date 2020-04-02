@@ -12,7 +12,7 @@ class Player{
       this.regionPosition = data.regionPos;
       this.elo = data.items[0].faceit_elo;
       this.level = data.items[0].game_skill_level;
-    
+
   }
 
   fillData(data){
@@ -46,5 +46,17 @@ class Player{
 }
 
 class Match{
+  constructor(){}
 
+    fillData(data){
+      this.matchId = data.match_id;
+      this.round_stats = data.round_stats;
+      this.team = data.teams[0];
+      this.team1 = data.teams[1];
+    }
+
+    error(error, type){
+      this.error = type;
+      this.message = error;
+    }
 }

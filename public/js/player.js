@@ -1,6 +1,7 @@
 const user = new URLSearchParams(window.location.search).get('id');
 const game = new URLSearchParams(window.location.search).get('game');
 
+
 window.addEventListener('DOMContentLoaded', async function(){
     let player = await processPlayerData();
     player = await processPlayerRanking(player);
@@ -121,77 +122,108 @@ async function createElements(player){
   nick.classList.add('player-nickname');
   profileInfoContainer.appendChild(nick);
 
-  //_blanck attr
-  let _blankAttr = document.createAttribute("target");
-  _blankAttr.value = "_blank";
+  /**************Info Container***********************************************/
+  const infoContainer = document.createElement('div');
+  infoContainer.classList.add('info-container');
 
-  //Player Profile
-  let btnWrapper = document.createElement('a');
-  btnWrapper.href = player.faceitUrl.replace('{lang}', 'en');
-  btnWrapper.classList.add('faceit-btn-profile');
-  btnWrapper.setAttributeNode(_blankAttr);
-
-  //Player id
-  /*const pId = document.createElement('p');
-  pId.classList.add('player-id');
-  pId.innerText = "Player ID: " + player.playerId;
-  profileInfoContainer.appendChild(pId);*/
-
-  //Ranking Container
+  /*Ranking Container*/
   const rankingContainer = document.createElement('div');
   rankingContainer.classList.add('ranking-container');
 
-  //Country
+  /*Global Position*/
   const globalRankingContainer = document.createElement('div');
   globalRankingContainer.classList.add('global-ranking-container');
 
-  const ranking = document.createElement('p');
-  ranking.innerHTML = "Global Ranking";
-  ranking.classList.add('player-global-ranking');
-
   const globalIcon = document.createElement('i');
   globalIcon.classList.add("fas");
-  globalIcon.classList.add("fa-blobe-europe");
+  globalIcon.classList.add("fa-globe-europe");
+  globalIcon.classList.add("player-global");
 
   let rankingPosition = document.createElement('p');
   rankingPosition.classList.add("player-position");
+  rankingPosition.classList.add("global-position");
   rankingPosition.innerHTML = player.regionPosition.toLocaleString("de-DE");
 
   globalRankingContainer.appendChild(globalIcon);
-  globalRankingContainer.appendChild(ranking);
   globalRankingContainer.appendChild(rankingPosition);
+  /****************/
 
+  /*Country Position*/
   const countryRankingContainer = document.createElement('div');
   countryRankingContainer.classList.add('country-ranking-container');
-
-  const country = document.createElement('p');
-  country.classList.add("player-country-ranking");
-  country.innerHTML = "National Ranking";
 
   rankingPosition = document.createElement('p');
   rankingPosition.classList.add("player-position");
   rankingPosition.innerHTML = player.countryPosition.toLocaleString("de-DE");
 
   const flag = document.createElement('img');
-  flag.src = "https://www.countryflags.io/" + player.country + "/flat/32.png"; //shiny
+  flag.src = "https://www.countryflags.io/" + player.country + "/flat/32.png";
   flag.classList.add('player-country-flag');
 
-  countryRankingContainer.appendChild(country);
-  countryRankingContainer.appendChild(rankingPosition);
   countryRankingContainer.appendChild(flag);
+  countryRankingContainer.appendChild(rankingPosition);
+  /****************/
 
+  //Add Country and Global Ranking to RankingContainer
   rankingContainer.appendChild(countryRankingContainer);
   rankingContainer.appendChild(globalRankingContainer);
 
-  profileInfoContainer.appendChild(rankingContainer);
+  infoContainer.appendChild(rankingContainer);
 
-  //Membership
+  /****Info Times**********/
+  const infoTimes = document.createElement('div');
+  infoTimes.classList.add('info-times');
+
+  /*AFK Times*/
+  const afkTimes = document.createElement('div');
+  afkTimes.classList.add('afk-times');
+
+  let labelAfkTimes = document.createElement('span');
+  labelAfkTimes.classList.add("afk-times-label");
+  labelAfkTimes.innerHTML = "AFK Times";
+
+  let valueAfkTimes = document.createElement('span');
+  valueAfkTimes.classList.add("afk-times-value");
+  valueAfkTimes.innerHTML = player.infractions.afk;
+
+  afkTimes.appendChild(labelAfkTimes);
+  afkTimes.appendChild(valueAfkTimes);
+  /****************/
+
+  /*LEAVE Times*/
+  const leaveTimes = document.createElement('div');
+  leaveTimes.classList.add('leave-times');
+
+  let labelLeaveTimes = document.createElement('span');
+  labelLeaveTimes.classList.add("leave-times-label");
+  labelLeaveTimes.innerHTML = "LEAVE Times";
+
+  let valueLeaveTimes = document.createElement('span');
+  valueLeaveTimes.classList.add("leave-times-value");
+  valueLeaveTimes.innerHTML = player.infractions.leaver;
+
+  leaveTimes.appendChild(labelLeaveTimes);
+  leaveTimes.appendChild(valueLeaveTimes);
+  /****************/
+  infoTimes.appendChild(afkTimes);
+  infoTimes.appendChild(leaveTimes);
+
+  infoContainer.appendChild(infoTimes);
+  /**************************/
+  /***************************************************/
+
+  /******* MEMBERSHIP AND STEAM ID'S CONTAINER ******/
+  const membSteamIdsContainer = document.createElement('div');
+  membSteamIdsContainer.classList.add('membSteamIds-container');
+
+  /*Membership*/
   const membershipContainer = document.createElement('div');
   membershipContainer.classList.add('membership-container');
 
-  const memb = document.createElement('p');
-  memb.classList.add("player-membership");
-  memb.innerText = "Membership";
+  const memb = document.createElement('i');
+  memb.classList.add("far");
+  memb.classList.add("fa-handshake");
+  memb.classList.add("player-memb");
 
   const membVal = document.createElement('p');
   membVal.classList.add("membership");
@@ -203,11 +235,72 @@ async function createElements(player){
   membershipContainer.appendChild(memb);
   membershipContainer.appendChild(membVal);
 
-  profileInfoContainer.appendChild(membershipContainer);
+  membSteamIdsContainer.appendChild(membershipContainer);
+  /****************/
+
+  /*Steam Id's*/
+  const steamIds = document.createElement("div");
+  steamIds.classList.add("steam-ids");
+
+  /*Steam ID*/
+  const steamId = document.createElement("div");
+  steamId.classList.add("steam-id");
+
+  let labelSteamId = document.createElement("span");
+  labelSteamId.classList.add("steamId-label");
+  labelSteamId.innerHTML = "SteamID";
+
+  let valueSteamId = document.createElement("span");
+  valueSteamId.classList.add("steamId-value");
+  valueSteamId.innerHTML = player.steamId;
+
+  steamId.appendChild(labelSteamId);
+  steamId.appendChild(valueSteamId);
+  /****************/
+
+  /*Steam ID64*/
+  const steamId64 = document.createElement("div");
+  steamId64.classList.add("steam-id");
+  steamId64.classList.add("steamId64");
+
+  let labelSteamId64 = document.createElement("span");
+  labelSteamId64.classList.add("steamId-label");
+  labelSteamId64.innerHTML = "SteamID64";
+
+  let valueSteamId64 = document.createElement("span");
+  valueSteamId64.classList.add("steamId-value");
+  valueSteamId64.innerHTML = player.steamId64;
+
+  steamId64.appendChild(labelSteamId64);
+  steamId64.appendChild(valueSteamId64);
+
+  /****************/
+
+  steamIds.appendChild(steamId);
+  steamIds.appendChild(steamId64);
+  /**********************************************/
+
+  membSteamIdsContainer.appendChild(steamIds);
+  /*********************************************************/
+  infoContainer.appendChild(membSteamIdsContainer);
+
+  profileInfoContainer.appendChild(infoContainer);
+  /***********************************************************************/
+
+  /*****************  BUTTONS  *****************/
+  //_blank attr
+  let _blankAttr = document.createAttribute("target");
+  _blankAttr.value = "_blank";
 
   //Buttons Container
   const buttonsContainer = document.createElement('div');
   buttonsContainer.classList.add('buttons-profile-container');
+
+  //Player Profile
+  let btnWrapper = document.createElement('a');
+  btnWrapper.href = player.faceitUrl.replace('{lang}', 'en');
+  btnWrapper.classList.add('faceit-btn-profile');
+  btnWrapper.setAttributeNode(_blankAttr);
 
   //Faceit Profile
   const faceitProfile = document.createElement('button');
@@ -234,7 +327,7 @@ async function createElements(player){
   buttonsContainer.appendChild(btnWrapper);
 
   profileContainer.appendChild(buttonsContainer);
-
+  /**************/
 
   const levelContainer = document.createElement('div');
   levelContainer.classList.add('player-level-container');
@@ -265,18 +358,7 @@ async function createElements(player){
   levelContainer.appendChild(eloContainer);
   levelContainer.appendChild(eloBar);
 
-  col.push(levelContainer);
-
-  //SteamIDs
-  const steamId = document.createElement('p');
-  const steamId3 = document.createElement('p');
-  const steamId64 = document.createElement('p');
-  steamId.innerText = "Steam ID: " + player.steamId;
-  steamId3.innerText = "Steam ID3: " + player.steamId3;
-  steamId64.innerText = "Steam ID64: " + player.steamId64;
-  col.push(steamId);
-  col.push(steamId3);
-  col.push(steamId64);
+  //col.push(levelContainer);
 
   col.forEach(item => {
     window.mainContainer.appendChild(item);
@@ -311,6 +393,10 @@ async function createPlayerMatches(player){
 
     //RESULT
     let row = matchesRows.insertRow(0);
+    row.classList.add("matchId");
+    row.id = "matchId";
+    row.setAttribute("match_id",match.match_id);
+
     let cellResult = row.insertCell(0);
     let cellTextResult = document.createElement('span');
     cellTextResult.innerHTML = match.results.winner == factionWinner ? "WIN" : "LOSE";
@@ -363,9 +449,20 @@ async function createPlayerMatches(player){
     //ELO POINTS
     let cellElo = row.insertCell(6);
     cellElo.innerHTML = "";
+
+    /*Adding event handlers*/
+    document.getElementById('matchId').addEventListener('click', getMatchData);
   };
 
-    ToggleLoading();
+  function getMatchData(e) {
+    console.log(e);
+
+    const match = e.target.parentElement.attributes.match_id.value;
+    window.location.href = '/match.html?id=' + match;
+  };
+  /*************************/
+
+  ToggleLoading();
 }
 
 async function requestData(dir, options) {

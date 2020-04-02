@@ -1,0 +1,353 @@
+.container, .matches, .charts, .summary{
+  margin-bottom: 10px;
+}
+
+.profile-container{
+  min-height: 7.5em;
+  border: 1px solid #b7b7b7;
+  border-radius: 5px;
+  margin: 1% 15% 1% 15%;
+}
+
+.profile-info-container{
+  display: inline-block;
+  width: 90%;
+}
+
+.player-info{
+
+}
+
+.player-nickname{
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+
+.player-id{
+  margin: 5px 0 5px 0;
+}
+
+.avatar-container{
+  max-width: 100px;
+  overflow: hidden;
+  margin: 10px 5px 0 10px;
+  float: left;
+}
+
+.player-avatar{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.info-container{
+  width: 100%;
+}
+
+.ranking-container{
+  display: inline-block;
+  width: 10%;
+}
+
+.country-ranking-container{
+  display: inline-flex;
+  align-items: center;
+}
+
+.global-ranking-container{
+  margin-top: -3px;
+}
+
+.player-position{
+  /*cursor: pointer;*/
+  margin: 0 0 0 5px;
+  background-color: #494949;
+  color:white;
+  display: inline-block;
+  padding: 0 0.5em 0 0.5em;
+  font-weight: 525;
+  font-size: 12px;
+  letter-spacing: 1px;
+  border-radius: 2px;
+}
+
+.global-position{
+  margin-left: 7px;
+}
+
+.player-country-ranking{
+  margin: 0;
+  font-size: 15px;
+  background-color: #f5f5f5;
+}
+
+.player-country-flag{
+  width: 20px;
+}
+
+.player-global-ranking{
+  margin: 0;
+  display: inline-block;
+  background-color: #f5f5f5;
+}
+
+.player-global{
+  margin-left: 3px;
+  color: var(--text);
+}
+
+
+.info-times{
+  display: inline-block;
+  width: 10%;
+}
+
+.afk-times{
+  background-color: #494949;
+  padding-left: 4px;
+  width: 101.6px;
+}
+
+.afk-times-label{
+  display: inline-block;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+}
+
+.afk-times-value{
+  background-color: #d9534f;
+  margin-left: 17.5px;
+  color: white;
+  display: inline-block;
+  padding: 4px 0.7em 4px 0.7em;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.leave-times{
+  background-color: #494949;
+  padding-left: 4px;
+  margin-top: 2px;
+  width: 101.6px;
+}
+
+.leave-times-label{
+  display: inline-block;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+}
+
+.leave-times-value{
+  background-color: #d9534f;
+  margin-left: 5.5px;
+  color: white;
+  display: inline-block;
+  padding: 4px 0.7em 4px 0.7em;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.player-membership{
+  margin: 2px 0 0 0;
+  display: inline-block;
+  background-color: #f5f5f5;
+}
+
+.player-memb{
+  margin-left: 2px;
+  color: var(--text);
+}
+
+.membership-container{
+    width: 10%;
+    margin-top: 1px;
+    display: inline-flex;
+}
+
+.membership{
+  background-color: green;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 0 0 0 4px;
+  color: white;
+  padding: 0 0.5em 0 0.5em;
+  font-weight: 525;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.steam-ids{
+  display: inline-flex;
+}
+
+.steam-id{
+  background-color: #494949;
+  padding-left: 4px;
+  margin-top: 2px;
+  width: 208.5px;
+}
+
+.steamId-label{
+  display: inline-block;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+}
+
+.steamId-value{
+  background-color: #d9534f;
+  margin-left: 5px;
+  color: white;
+  display: inline-block;
+  padding: 4px 0.7em 4px 0.7em;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.steamId64{
+  margin-left: 10px;
+  width: 217.7px;
+}
+
+.buttons-profile-container{
+  margin: .5em 10px 10px;
+  width: 100%;
+}
+
+.faceit-btn-profile{
+  margin-right: 10px;
+}
+
+.player-btn{
+  cursor: pointer;
+  color: var(--text);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--bg);
+  padding: 5px;
+  border: 2px solid var(--text);
+  display: inline-block;
+  width: 12em;
+}
+
+.player-btn:hover{
+  color: #ffffff !important;
+  background: #df6f0d;
+  border-color: #df6f0d !important;
+  /*transition: all 0.4s ease 0s;*/
+}
+
+.player-level-container{
+  margin: 10px 15% 0 15%;
+  background: linear-gradient(143deg, rgba(223,111,0,1) 5%, rgba(3,3,3,0.7511205165660014) 5%);
+  padding: 1% 0 1% 0;
+}
+
+.level-elo{
+  color: #ffffff;
+  font-weight: 550;
+  text-align: center;
+  margin: 2% auto;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.elo-bar{
+  background-color: #959595;
+  height: 30px;
+  width: 80%;
+  margin: 2% auto;
+}
+
+.player-elo-bar{
+  background-color: #df6f0d;
+  height: 30px;
+}
+
+.stats-container{
+  margin: 20px 15% 0;
+  border-top: 1px solid #b7b7b7;
+  border-bottom: 1px solid #b7b7b7;
+  padding: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.stats-title{
+  font-size: 1.3em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 0 0 10px 0;
+}
+
+.stats-item{
+  margin-left: 70px;
+  text-align: center;
+  padding: 5px;
+}
+
+.stats-header{
+  display: block;
+  align-items: center;
+  font-size: 13px;
+}
+
+.stats-value{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#matches-container{
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 10px 15% 0;
+}
+
+.title-matches-history{
+  font-size: 100%;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.table-matches{
+  border: 1px solid var(--text);
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100.1%;
+}
+
+.table-matches thead {
+  background-color: rgba(3,3,3,0.7511205165660014);
+  color: white;
+}
+
+.table-matches th {
+  text-align: left;
+  padding: 10px 0 10px 10px;
+  user-select: none;
+}
+
+.table-matches th:first-child{
+    padding: 10px 0 10px 13px;
+}
+
+.table-matches td{
+  border: 1px solid #c8cdd0;
+  border-width: 0 0 1px;
+  padding: .75em .75em;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.table-matches .matchId{
+  cursor: pointer;;
+}

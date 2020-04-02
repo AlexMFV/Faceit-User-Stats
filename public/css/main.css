@@ -1,11 +1,28 @@
+:root{
+  --light: #fff;
+  --dark: #2c2e2d;
+}
+
 body{
-  color: #333;
+  color: var(--text);
+  background-color: var(--bg);
   font-family: "Nunito Sans",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  transition: background 500ms ease-in-out, color 1000ms ease-in-out;
+}
+
+.light{
+  --text: var(--dark);
+  --bg: var(--light);
+}
+
+.dark{
+  --text: var(--light);
+  --bg: var(--dark);
 }
 
 /*LOADING*/
 .lds-background{
-  background-color: #fff;
+  background-color: var(--bg);
   position:absolute;
   top:0;
   left:0;
@@ -26,7 +43,8 @@ body{
   position: absolute;
   left: 8px;
   width: 16px;
-  background: #363636;;
+  /*background: #363636;*/
+  background: var(--text);
   animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
@@ -52,201 +70,7 @@ body{
     height: 32px;
   }
 }
-
 /******************/
-
-.container, .matches, .charts, .summary{
-  margin-bottom: 10px;
-}
-
-.profile-container{
-  /*width: 100%;*/
-  min-height: 7.5em;
-  border: 1px solid #b7b7b7;
-  border-radius: 5px;
-  margin: 1%;
-  /*background-color: green;*/
-}
-
-.profile-info-container{
-  display: inline-block;
-  width: 90%;
-}
-
-.player-info{
-
-}
-
-.player-nickname{
-  display: inline-block;
-  margin: 10px 10px 0 0;
-}
-
-.player-id{
-  margin: 5px 0 5px 0;
-}
-
-.avatar-container{
-  max-width: 100px;
-  overflow: hidden;
-  margin: 10px 5px 0 10px;
-  float: left;
-}
-
-.player-avatar{
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.country-ranking-container{
-  display: inline-flex;
-  align-items: center;
-}
-
-.global-ranking-container{
-
-}
-
-.player-position{
-  /*cursor: pointer;*/
-  margin: 0 0 0 5px;
-  background-color: #494949;
-  color:white;
-  display: inline-block;
-  padding: 0 0.5em 0 0.5em;
-  font-weight: 525;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.player-country-ranking{
-  margin: 0;
-  font-size: 15px;
-  background-color: #f5f5f5;
-}
-
-.player-country-flag{
-  width: 25px;
-  margin-left: 5px;
-}
-
-.player-global-ranking{
-  margin: 0;
-  display: inline-block;
-  background-color: #f5f5f5;
-}
-
-.player-membership{
-  margin: 2px 0 0 0;
-  display: inline-block;
-  background-color: #f5f5f5;
-}
-
-.membership{
-  background-color: green;
-  border-radius: 2px;
-  display: inline-block;
-  margin: 0 0 0 5px;
-  color: white;
-  padding: 0 0.5em 0 0.5em;
-  font-weight: 525;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.buttons-profile-container{
-  margin: .5em 10px 10px;
-  width: 100%;
-}
-
-.faceit-btn-profile{
-  margin-right: 10px;
-}
-
-.player-btn{
-  cursor: pointer;
-  color:#494949;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #ffffff;
-  padding: 5px;
-  border: 2px solid #494949;
-  display: inline-block;
-  width: 12em;
-  /*transition: all 0.4s ease 0s;*/
-}
-
-.player-btn:hover{
-  color: #ffffff !important;
-  background: #df6f0d;
-  border-color: #df6f0d !important;
-  /*transition: all 0.4s ease 0s;*/
-}
-
-.player-level-container{
-  margin: 10px 15% 0 15%;
-  background: linear-gradient(143deg, rgba(223,111,0,1) 5%, rgba(3,3,3,0.7511205165660014) 5%);
-  padding: 1% 0 1% 0;
-}
-
-.level-elo{
-  color: #ffffff;
-  font-weight: 550;
-  text-align: center;
-  margin: 2% auto;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.elo-bar{
-  background-color: #959595;
-  height: 30px;
-  width: 80%;
-  margin: 2% auto;
-}
-
-.player-elo-bar{
-  background-color:#df6f0d;
-  height: 30px;
-}
-
-#matches-container{
-  border: 1px solid rgba(3,3,3,0.7511205165660014);
-  background-color: #fff;
-  color: #363636;
-  margin: 10px 15% 0;
-}
-
-.table-matches{
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-}
-
-.table-matches thead {
-  background-color: rgba(3,3,3,0.7511205165660014);
-  color: white;
-}
-
-.table-matches th {
-  text-align: left;
-  padding: 10px 0 10px 10px;
-  user-select: none;
-}
-
-.table-matches th:first-child{
-    padding: 10px 0 10px 13px;
-}
-
-.table-matches td{
-  border: 1px solid #c8cdd0;
-  border-width: 0 0 1px;
-  padding: .75em .75em;
-  font-weight: 600;
-  font-size: 13px;
-}
 
 .pagination{
   width: 100%;
