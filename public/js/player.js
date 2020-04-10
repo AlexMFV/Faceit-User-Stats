@@ -4,16 +4,22 @@ const game = new URLSearchParams(window.location.search).get('game');
 
 window.addEventListener('DOMContentLoaded', async function(){
     let player = await processPlayerData();
-    player = await processPlayerRanking(player);
+    if(player != null){
+      player = await processPlayerRanking(player);
 
-    let matches = await processPlayerMatches(player);
-    player.matches = matches.items;
+      let matches = await processPlayerMatches(player);
+      player.matches = matches.items;
 
-    for(let match = 0;match < player.matches.length;match++){
-      let matchInfo = await processMatchInfo(player.matches[match]);
-      player.matches[match].rounds = matchInfo;
-    }
-    const playerExists = await fillPlayerData(player); // Return false if the user does not exist
+      for(let match = 0;match < player.matches.length;match++){
+        let matchInfo = await processMatchInfo(player.matches[match]);
+        player.matches[match].rounds = matchInfo;
+      }
+      const playerExists = await fillPlayerData(player); // Return false if the user does not exist
+      }
+      else {
+        window.history.back();
+        //Menssage there is no FaceitUser with that Faceit Name or SteamId
+      }
 });
 
 async function processPlayerData(){

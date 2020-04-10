@@ -3,15 +3,46 @@
     <meta charset="utf-8">
     <title>Faceit Stats</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="https://kit.fontawesome.com/d536b68b1c.js" crossorigin="anonymous"></script>
   </head>
-  <body>
-    <h1>Faceit Stats</h1>
-    <p><input type="text" id="steamId" value="" placeholder="FACEIT Name / SteamID64"> <button id="btnSearch" type="submit" name="button">Search</button></p>
-    <div id="radioCont" class="radios">
-      <input type="radio" checked="true" name="game" title="CS:GO" value="csgo"> CSGO
-      <input type="radio" name="game" title="Rocket League" value="rocket_league"> Rocket League
-      <input type="radio" name="game" title="Dota 2" value="dota2"> Dota 2
-    </div>
+  <body class="light">
+    <div class="faceit-stats-container">
+      <div class="navbar">
+        <div class="navbar-left">
+          <img src="" alt="">
+          <h1>Faceit Stats</h1>
+        </div>
+        <div class="navbar-right">
+          <h3>Donate</h3>
+          <h3>Contact</h3>
+        </div>
+      </div>
+      <div class="search">
+        <div class="search-field">
+          <div class="field">
+            <input type="text" id="steamId" value="" placeholder="FACEIT login OR SteamID64..">
+          </div>
+          <div class="control">
+            <i class="fas fa-search" id="btnSearch"></i>
+          </div>
+        </div>
+        <div id="radioCont" class="radios">
+          <div class="flex">
+            <input type="radio" class="radio" id="csgo" checked="true" name="game" title="CS:GO" value="csgo">
+            <label for="csgo">CS:GO</label>
+          </div>
+          <div class="flex">
+            <input type="radio" class="radio" id="rocket_league" name="game" title="Rocket League" value="rocket_league">
+            <label for="rocket_league">Rocket League</label>
+          </div>
+          <div class="flex">
+            <input type="radio" class="radio" id="dota2" name="game" title="Dota 2" value="dota2">
+            <label for="dota2">Dota 2</label>
+          </div>
+        </div>
+      </div>
+  </div>
     <h3>TODO List Index.html</h3>
     <h4>&nbsp -Everything has to have links to the users profiles.</h4>
     <ul>
@@ -26,6 +57,6 @@
     </ul>
   </body>
 
-  <script src="/public/js/enum.js" charset="utf-8"></script>
+  <!--<script src="/public/js/enum.js" charset="utf-8"></script>-->
   <script src="/public/js/index.js"></script>
 </html>

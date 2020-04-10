@@ -42,56 +42,175 @@ async function createElements(match){
   const matchHeaderContainer = document.createElement("div");
   matchHeaderContainer.classList.add("match-header");
 
-  let matchHeader = document.createElement("div");
-  let matchSecundHeader = document.createElement("div");
+  let matchSecondHeader = document.createElement("div");
+  matchSecondHeader.classList.add("second-header");
   let matchTeamNames = document.createElement("span");
-
-  matchSecundHeader.classList.add("secund-header");
-  matchTeamNames.innerHTML = match.team.team_stats.Team + "  ";
-
-  matchSecundHeader.appendChild(matchTeamNames);
+  let matchScoreHeader = document.createElement("div");
+  matchScoreHeader.classList.add("score-header");
 
   matchTeamNames = document.createElement("span");
   matchTeamNames.innerHTML = match.team.team_stats["Final Score"];
 
-  matchSecundHeader.appendChild(matchTeamNames);
-  matchHeader.appendChild(matchSecundHeader);
-  matchHeaderContainer.appendChild(matchHeader);
-
-  matchHeader = document.createElement("div");
-
-  matchSecundHeader = document.createElement("div");
-  matchSecundHeader.classList.add("secund-header");
+  matchScoreHeader.appendChild(matchTeamNames);
+  matchSecondHeader.appendChild(matchScoreHeader);
 
   matchTeamNames = document.createElement("span");
-  matchTeamNames.innerHTML = "VS";
+  matchTeamNames.classList.add("team-titles");
+  matchTeamNames.innerHTML = match.team.team_stats.Team;
 
-  matchSecundHeader.appendChild(matchTeamNames);
-  matchHeaderContainer.appendChild(matchSecundHeader);
+  matchSecondHeader.appendChild(matchTeamNames);
 
-  matchHeader = document.createElement("div");
+  matchHeaderContainer.appendChild(matchSecondHeader);
 
-  matchSecundHeader = document.createElement("div");
-  matchSecundHeader.classList.add("secund-header");
+  /*RESULTS OF HALFS*/
+  matchSecondHeader = document.createElement("div");
+  matchSecondHeader.classList.add("second-header");
+  /***************/
+  let matchResultContainer = document.createElement("div");
+  matchResultContainer.classList.add("result-container");
 
   matchTeamNames = document.createElement("span");
-  matchTeamNames.innerHTML = match.team1.team_stats.Team + "  ";
+  matchTeamNames.classList.add("first-team");
 
-  matchSecundHeader.appendChild(matchTeamNames);
+  matchTeamNames.innerHTML = match.team.team_stats["First Half Score"];
+  matchResultContainer.appendChild(matchTeamNames);
+
+  matchTeamNames = document.createElement("span");
+  matchTeamNames.classList.add("second-team");
+
+  matchTeamNames.innerHTML = match.team.team_stats["Second Half Score"];
+  matchResultContainer.appendChild(matchTeamNames);
+
+  matchSecondHeader.appendChild(matchResultContainer);
+  matchHeaderContainer.appendChild(matchSecondHeader);
+  /***************/
+  /***************/
+  matchResultContainer = document.createElement("div");
+  matchResultContainer.classList.add("label-result-container");
+
+  matchTeamNames = document.createElement("span");
+  matchTeamNames.classList.add("label-result");
+  matchTeamNames.innerHTML = "1º";
+
+  matchResultContainer.appendChild(matchTeamNames);
+
+  matchTeamNames = document.createElement("span");
+  matchTeamNames.classList.add("label-result");
+  matchTeamNames.innerHTML = "2ª";
+
+  matchResultContainer.appendChild(matchTeamNames);
+  matchSecondHeader.appendChild(matchResultContainer);
+  /***************/
+
+  /***************/
+  matchResultContainer = document.createElement("div");
+  matchResultContainer.classList.add("result-container");
+
+  matchTeamNames = document.createElement("span");
+  matchTeamNames.classList.add("first-team");
+
+  matchTeamNames.innerHTML = match.team1.team_stats["First Half Score"];
+  matchResultContainer.appendChild(matchTeamNames);
+  /***************/
+  /***************/
+  matchTeamNames = document.createElement("span");
+  matchTeamNames.classList.add("second-team");
+
+  matchTeamNames.innerHTML = match.team1.team_stats["Second Half Score"];
+  matchResultContainer.appendChild(matchTeamNames);
+
+  matchSecondHeader.appendChild(matchResultContainer);
+  matchHeaderContainer.appendChild(matchSecondHeader);
+  /***************/
+
+  matchSecondHeader = document.createElement("div");
+  matchSecondHeader.classList.add("second-header");
+
+  matchScoreHeader = document.createElement("div");
+  matchScoreHeader.classList.add("score-header");
 
   matchTeamNames = document.createElement("span");
   matchTeamNames.innerHTML = match.team1.team_stats["Final Score"];
 
-  matchSecundHeader.appendChild(matchTeamNames);
-  matchHeader.appendChild(matchSecundHeader);
+  matchScoreHeader.appendChild(matchTeamNames);
+  matchSecondHeader.appendChild(matchScoreHeader);
 
-  matchHeaderContainer.appendChild(matchHeader);
+  matchTeamNames = document.createElement("span");
+  matchTeamNames.classList.add("team-titles");
+  matchTeamNames.innerHTML = match.team1.team_stats.Team;
+
+  matchSecondHeader.appendChild(matchTeamNames);
+  matchHeaderContainer.appendChild(matchSecondHeader);
   /***************************/
 
   matchContainer.appendChild(matchHeaderContainer);
   /****************/
 
+  /*TEAMS CONTAINER*/
+  let teamMainContainer = document.createElement("div");
+  teamMainContainer.classList.add("team-main-container");
+  /*******************************************************/
+
+  /*MAP*/
+  let mapContainer = document.createElement("div");
+  mapContainer.classList.add("map-container");
+
+  let iconMap = document.createElement("i");
+  iconMap.classList.add("fas");
+  iconMap.classList.add("fa-map-marked-alt");
+
+  let matchMap = document.createElement("span");
+  matchMap.classList.add("map");
+  matchMap.innerHTML = match.round_stats.Map;
+
+  mapContainer.appendChild(iconMap);
+  mapContainer.appendChild(matchMap);
+  teamMainContainer.appendChild(mapContainer);
+  /**/
+
+  /*TEAM HEADER*/
+  let headerContainer = document.createElement("div");
+  headerContainer.classList.add("teams-header-container");
+
+  let iconGraphic = document.createElement("i");
+  iconGraphic.classList.add("fas");
+  iconGraphic.classList.add("fa-chart-bar");
+
+  /*right status container*/
+  let rightContainer = document.createElement("div");
+  rightContainer.classList.add("right-status-container");
+
+  let rightValue = document.createElement("span");
+  rightValue.innerHTML = "K";
+  rightContainer.appendChild(rightValue);
+
+  rightValue = document.createElement("span");
+  rightValue.innerHTML = "A";
+  rightContainer.appendChild(rightValue);
+
+  rightValue = document.createElement("span");
+  rightValue.innerHTML = "D";
+  rightContainer.appendChild(rightValue);
+
+  rightValue = document.createElement("span");
+  rightValue.innerHTML = "MVP's";
+  rightContainer.appendChild(rightValue);
+  headerContainer.appendChild(iconGraphic);
+  headerContainer.appendChild(rightContainer);
+  teamMainContainer.appendChild(headerContainer);
+  /**/
+
+  const firstTeamContainer = DoPlayerStatsTest(match.team,"first-team-container");
+  teamMainContainer.appendChild(firstTeamContainer);
+
+  const secondTeamContainer = DoPlayerStatsTest(match.team1,"second-team-container");
+  teamMainContainer.appendChild(secondTeamContainer);
+  /**/
+
+  matchContainer.appendChild(teamMainContainer);
+  /***********************/
   col.push(matchContainer);
+
   /*******************************************************************************************/
 
   /*
@@ -101,13 +220,13 @@ async function createElements(match){
   */
 
   /*First/Left Team*/
-  const firstTeamContainer = DoPlayerStats(match.team,"left-team-container");
-  col.push(firstTeamContainer);
+  //const firstTeamContainer = DoPlayerStats(match.team,"left-team-container");
+  //col.push(firstTeamContainer);
   /*******************************************************************************************/
 
   /*Secund/Right Team*/
-  const secundTeamContainer = DoPlayerStats(match.team1,"right-team-container");
-  col.push(secundTeamContainer);
+  //const secondTeamContainer = DoPlayerStats(match.team1,"right-team-container");
+  //col.push(secondTeamContainer);
   /*******************************************************************************************/
 
   col.forEach(item => {
@@ -117,6 +236,70 @@ async function createElements(match){
 
   ToggleLoading();
 };
+
+function DoPlayerStatsTest(team, classContainer){
+  const teamContainer = document.createElement("div");
+  teamContainer.classList.add(classContainer);
+
+  const ulContainer = document.createElement("ul");
+
+  const Team = team;
+  let players = Team.players;
+
+  for(let i = 0;i <= players.length - 1;i++){
+    const player = players[i];
+    const playerStats = player.player_stats;
+
+    let liContainer = document.createElement("li");
+    liContainer.classList.add("row-status");
+
+    let levelValue = document.createElement("span");
+    levelValue.classList.add("level-value");
+    levelValue.innerHTML = "6";
+    liContainer.appendChild(levelValue);
+
+    let imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
+
+    let imgValue = document.createElement("img");
+    imgValue.classList.add("img");
+    imgValue.src = "https://i.picsum.photos/id/581/200/300.jpg";
+    imgContainer.appendChild(imgValue);
+    liContainer.appendChild(imgContainer);
+
+    let nameValue = document.createElement("span");
+    nameValue.classList.add("name-value");
+    nameValue.innerHTML = player.nickname;
+    liContainer.appendChild(nameValue);
+
+    rightContainer = document.createElement("div");
+    rightContainer.classList.add("right-status-container");
+
+    rightValue = document.createElement("span");
+    rightValue.innerHTML = playerStats.Kills;
+    rightContainer.appendChild(rightValue);
+
+    rightValue = document.createElement("span");
+    rightValue.innerHTML = playerStats.Assists;
+    rightContainer.appendChild(rightValue);
+
+    rightValue = document.createElement("span");
+    rightValue.innerHTML = playerStats.Deaths;
+    rightContainer.appendChild(rightValue);
+
+    rightValue = document.createElement("span");
+    rightValue.innerHTML = playerStats.MVPs;
+    rightContainer.appendChild(rightValue);
+
+    liContainer.appendChild(rightContainer);
+
+    ulContainer.appendChild(liContainer);
+  }
+
+  teamContainer.appendChild(ulContainer);
+
+  return teamContainer;
+}
 
 function DoPlayerStats(team, classContainer){
   const teamContainer = document.createElement("div");

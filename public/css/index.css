@@ -1,0 +1,129 @@
+body{
+  margin:0;
+}
+
+.faceit-stats-container{
+  width: 100%;
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.faceit-stats-container .navbar{
+  padding: 10px 200px;
+  border-bottom: 0.3px solid var(--bg);
+}
+
+.navbar-left, .navbar-right{
+  display: inline-block;
+}
+
+.navbar-left{
+  width: 50%;
+}
+.navbar-right{
+  width: 49%;
+  text-align: end;
+}
+
+.faceit-stats-container .navbar h1{
+    margin: 5px;
+    font-size: 30px;
+    display: flex;
+}
+.faceit-stats-container .navbar h3{
+    display: inline-flex;
+}
+
+
+.faceit-stats-container .search{
+  padding: 20px 250px;
+}
+
+.search-field{
+  display: flex;
+}
+
+.search-field .field{
+  width: 100%;
+  margin-right: 0.75rem;
+}
+
+.search-field .field #steamId{
+  display: inline-flex;
+  font-size: 1.25rem;
+  width: 100%;
+  height: 2.5em;
+  padding-left: 10px;
+  outline: none;
+  border: 2px solid var(--bg);
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.search-field #btnSearch{
+  display: block;
+  cursor: pointer;
+  font-size: 1.25rem;
+  height: 1.1em;
+  padding: 13px;
+  position: relative;
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.search-field #btnSearch:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000px;
+}
+
+.radios{
+  margin-top: 10px;
+}
+
+.flex {
+  display: inline-flex;;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.radios label{
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* create custom radiobutton appearance */
+  outline: none;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 2px solid #bbb;
+  background-color: #e7e6e7;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+  background-color: #df6f0d;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
+}
