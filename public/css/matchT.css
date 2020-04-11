@@ -13,9 +13,9 @@ body {
 }
 
 .page-title{
-  margin-left: 100px;
-  border-left: 10px solid #b9c5ce;
-  border-right: 130px solid #b9c5ce;
+  margin-left: 80px;
+  border-left: 10px solid #dcdcdc;
+  border-right: 130px solid #dcdcdc;
 }
 
 .page-title h2{
@@ -100,14 +100,14 @@ body {
 
 .map{
   margin-left: 5px;
-  color: #707070;
+  color: var(--text);
   font-weight: 700;
 }
 
 .teams-header-container{
   margin-top: 5px;
   height: 20px;
-  background-color: #F3F3F3;
+  background-color: #dcdcdc;
   color: #707070;
   user-select: none;
 }
@@ -141,13 +141,18 @@ body {
 .first-team-container ul, .second-team-container ul{
   margin: 5px 0;
   padding-inline-start: 0;
+  background-color: var(--bg);
 }
 
 .first-team-container ul .row-status, .second-team-container ul .row-status{
    list-style-type: none;
-   background-color: #b9c5ce;
+   background-color: #77819e;
    height: 30px;
    margin-bottom: 5px;
+}
+
+.dark .first-team-container ul .row-status, .dark .second-team-container ul .row-status{
+  background-color: #504b4b;
 }
 
 .row-status .right-status-container span{

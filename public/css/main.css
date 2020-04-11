@@ -25,11 +25,11 @@ a{
 }
 
 .main-menu{
-  background-color: #FE6315;
+  background-color: #feb062;
   position: fixed;
   left: 0;
   top: 0;
-  width: 100px;;
+  width: 80px;
   height: 100%;
 }
 
@@ -47,23 +47,27 @@ a{
   transform: translate3d(0, 0, 0);
   perspective: 1000px;
 }
+.left-menu i{
+    font-size: 17px;
+}
 
 .menu-value{
   display: block;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .logo{
   text-align: center;
   margin-bottom: 50px;
+  margin-top: 10px;
 }
 
 .logo span{
-  font-size: 45px;
+  font-size: 35px;
   font-family: "Bahnschrift";
   font-weight: 700;
-  color: #242424;
+  color: #575151;
 }
 
 .search{
@@ -74,10 +78,9 @@ a{
 }
 
 .search input{
-  width: 83px;
+  width: 63px;
   margin-left: 3px;
   padding: 5px;
-  text-align: center;
   border-width: 0;
   color: #707070;
   font-weight: 700;
@@ -86,7 +89,7 @@ a{
 .search input::placeholder{
   color: #9A9A9A;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .search input:focus{

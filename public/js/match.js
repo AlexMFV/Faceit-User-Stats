@@ -29,6 +29,41 @@ async function fillMatchData(match){
   return true;
 };
 
+async function getPlayerData(user){
+  let player = await processPlayerData(user);
+  if(player != null){
+    //player = processPlayerRanking(player); //FILLRANKING PROBLEM
+    return player;
+  }
+}
+async function processPlayerData(user){
+  const jsonData = await requestData('/api/player/'+ user, {method: "GET"});
+  let player = new Player();
+
+  if("errors" in jsonData)
+    player = null;
+  else
+    player.fillSimpleData(jsonData);
+
+  return player;
+};
+async function processPlayerRanking(player){
+  const playerInfo = {
+    id: player.playerId,
+    game: 'csgo',
+    regio: 'EU',
+    //region: player.games[game].region, //Change this to be dynamic
+    country: player.country
+  };
+
+  const data = JSON.stringify(playerInfo);
+
+  const rankingData = await requestData('/api/ranking/' + data, {method: "GET"});
+  player.fillRanking(rankingData);
+
+  return player;
+}
+
 async function createElements(match){
   console.log(match);
 
@@ -200,10 +235,10 @@ async function createElements(match){
   teamMainContainer.appendChild(headerContainer);
   /**/
 
-  const firstTeamContainer = DoPlayerStatsTest(match.team,"first-team-container");
+  const firstTeamContainer = await doPlayerStats(match.team,"first-team-container");
   teamMainContainer.appendChild(firstTeamContainer);
 
-  const secondTeamContainer = DoPlayerStatsTest(match.team1,"second-team-container");
+  const secondTeamContainer = await doPlayerStats(match.team1,"second-team-container");
   teamMainContainer.appendChild(secondTeamContainer);
   /**/
 
@@ -218,17 +253,6 @@ async function createElements(match){
     FALTA AVATAR E LEVEL DO PLAYER (BUSCAR NA API)
   *
   */
-
-  /*First/Left Team*/
-  //const firstTeamContainer = DoPlayerStats(match.team,"left-team-container");
-  //col.push(firstTeamContainer);
-  /*******************************************************************************************/
-
-  /*Secund/Right Team*/
-  //const secondTeamContainer = DoPlayerStats(match.team1,"right-team-container");
-  //col.push(secondTeamContainer);
-  /*******************************************************************************************/
-
   col.forEach(item => {
     //window.mainContainer.appendChild(item);
     $('#content').append(item);
@@ -237,7 +261,7 @@ async function createElements(match){
   ToggleLoading();
 };
 
-function DoPlayerStatsTest(team, classContainer){
+async function doPlayerStats(team, classContainer){
   const teamContainer = document.createElement("div");
   teamContainer.classList.add(classContainer);
 
@@ -250,11 +274,14 @@ function DoPlayerStatsTest(team, classContainer){
     const player = players[i];
     const playerStats = player.player_stats;
 
+    const playerDetailInfo = await getPlayerData(player.nickname);
+
     let liContainer = document.createElement("li");
     liContainer.classList.add("row-status");
 
     let levelValue = document.createElement("span");
     levelValue.classList.add("level-value");
+    //levelValue.innerHTML = playerDetailInfo.level;
     levelValue.innerHTML = "6";
     liContainer.appendChild(levelValue);
 
@@ -263,7 +290,7 @@ function DoPlayerStatsTest(team, classContainer){
 
     let imgValue = document.createElement("img");
     imgValue.classList.add("img");
-    imgValue.src = "https://i.picsum.photos/id/581/200/300.jpg";
+    imgValue.src = playerDetailInfo.avatarUrl;
     imgContainer.appendChild(imgValue);
     liContainer.appendChild(imgContainer);
 
@@ -297,151 +324,6 @@ function DoPlayerStatsTest(team, classContainer){
   }
 
   teamContainer.appendChild(ulContainer);
-
-  return teamContainer;
-}
-
-function DoPlayerStats(team, classContainer){
-  const teamContainer = document.createElement("div");
-  teamContainer.classList.add(classContainer);
-
-  const Team = team;
-  let players = Team.players;
-
-  for(let i = 0;i <= players.length - 1;i++){
-    const player = players[i];
-    const playerStats = player.player_stats;
-    let icon = document.createElement("i");
-
-    //Main Player Container
-    const playerContainer = document.createElement("div");
-    playerContainer.classList.add("player-container");
-
-    //Avatar
-    const avatarContainer = document.createElement("div");
-    avatarContainer.classList.add("avatar-container");
-
-    const avatar = document.createElement('img');
-    avatar.classList.add('player-avatar');
-    avatar.src = "https://i.picsum.photos/id/581/200/300.jpg";
-
-    avatarContainer.appendChild(avatar);
-    playerContainer.appendChild(avatarContainer);
-
-    //Name + Level
-    let staticContainer = document.createElement("div");
-    staticContainer.classList.add("static-container");
-
-    let value = document.createElement("span");
-    value.classList.add("static-value");
-    value.classList.add("title");
-    value.innerHTML = player.nickname + "  LEVEL 6";
-
-    staticContainer.appendChild(value);
-    playerContainer.appendChild(staticContainer);
-
-    //Score (K-A-D) + K/D Ratio
-    staticContainer = document.createElement("div");
-    staticContainer.classList.add("static-container");
-
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " " +playerStats.Kills + "-"+ playerStats.Assists + "-" + playerStats.Deaths + " (K/D " + playerStats["K/D Ratio"] + ")";
-
-    icon.classList.add("fas");
-    icon.classList.add("fa-chart-bar");
-
-    staticContainer.appendChild(icon);
-    staticContainer.appendChild(value);
-    playerContainer.appendChild(staticContainer);
-
-    //Headshot %
-    staticContainer = document.createElement("div");
-    staticContainer.classList.add("static-container");
-
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " " + playerStats["Headshots %"] + "%";
-
-    icon = document.createElement("i");
-    icon.classList.add("fas");
-    icon.classList.add("fa-bullseye");
-
-    staticContainer.appendChild(icon);
-    staticContainer.appendChild(value);
-
-    //MVP's
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " " + playerStats.MVPs;
-
-    icon = document.createElement("i");
-    icon.classList.add("fas");
-    icon.classList.add("fa-star");
-
-    staticContainer.appendChild(icon);
-    staticContainer.appendChild(value);
-    playerContainer.appendChild(staticContainer);
-
-    //Triple Kills
-    staticContainer  = document.createElement("div");
-    staticContainer.classList.add("static-container");
-
-    icon = document.createElement("i");
-    icon.classList.add("fas");
-    icon.classList.add("fa-skull");
-
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = "3x";
-
-    staticContainer.appendChild(value);
-    staticContainer.appendChild(icon);
-
-    icon = document.createElement("i");
-    icon.classList.add("fas");
-    icon.classList.add("fa-skull");
-
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " " + playerStats["Triple Kills"];
-    staticContainer.appendChild(value);
-
-    //Quadra Kills
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " / 4x";
-
-    staticContainer.appendChild(value);
-    staticContainer.appendChild(icon);
-
-    icon = document.createElement("i");
-    icon.classList.add("fas");
-    icon.classList.add("fa-skull");
-
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " " + playerStats["Quadro Kills"];
-    staticContainer.appendChild(value);
-
-    //Penta Kills
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = "/ 5x";
-
-    staticContainer.appendChild(value);
-    staticContainer.appendChild(icon);
-
-    value = document.createElement("span");
-    value.classList.add("static-value");
-    value.innerHTML = " " + playerStats["Penta Kills"];
-    staticContainer.appendChild(value);
-
-    playerContainer.appendChild(staticContainer);
-
-    /************************************************/
-    teamContainer.appendChild(playerContainer);
-  }
 
   return teamContainer;
 }
