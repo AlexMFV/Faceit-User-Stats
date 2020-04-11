@@ -10,6 +10,10 @@ body{
   transition: background 500ms ease-in-out, color 1000ms ease-in-out;
 }
 
+a{
+  text-decoration: none;
+}
+
 .light{
   --text: var(--dark);
   --bg: var(--light);
@@ -18,6 +22,90 @@ body{
 .dark{
   --text: var(--light);
   --bg: var(--dark);
+}
+
+.main-menu{
+  background-color: #FE6315;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100px;;
+  height: 100%;
+}
+
+.left-menu{
+  text-align: center;
+  margin-top: 70px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.left-menu:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000px;
+}
+
+.menu-value{
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logo{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.logo span{
+  font-size: 45px;
+  font-family: "Bahnschrift";
+  font-weight: 700;
+  color: #242424;
+}
+
+.search{
+  bottom: 0;
+  width: 100px;
+  position: absolute;
+  bottom: 4px;
+}
+
+.search input{
+  width: 83px;
+  margin-left: 3px;
+  padding: 5px;
+  text-align: center;
+  border-width: 0;
+  color: #707070;
+  font-weight: 700;
+}
+
+.search input::placeholder{
+  color: #9A9A9A;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.search input:focus{
+  outline: none;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
 }
 
 /*LOADING*/
