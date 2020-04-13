@@ -6,19 +6,50 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="/public/js/classes.js" charset="utf-8"></script>
     <script src="/public/js/player.js" charset="utf-8"></script>
+    <script src="/public/js/main.js" charset="utf-8"></script>
     <script src="https://kit.fontawesome.com/d536b68b1c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/player.css">
+    <link rel="stylesheet" href="/css/main.css">
   </head>
   <body class="light">
-    <div id="mainContainer" class="container">
+    <nav class="main-menu">
+      <div class="logo">
+        <span title="Faceit Stats">FS</span>
+      </div>
+      <a class="" href="https://faceitstats.alexmfv.com/">
+        <div class="home left-menu">
+          <i class="fas fa-home"></i>
+          <span class="menu-value">Home</span>
+        </div>
+      </a>
+      <div class="top-100 left-menu">
+        <i class="fas fa-star"></i>
+        <span class="menu-value" class="menu-value">Top 100</span>
+      </div>
+      <div class="donate left-menu">
+        <i class="fas fa-dollar-sign"></i>
+        <span class="menu-value">Donate</span>
+      </div>
+      <div class="contact left-menu">
+        <i class="fas fa-phone-alt"></i>
+        <span class="menu-value">Contact</span>
+      </div>
+      <div class="search">
+        <input type="text" id="steamId" name="search-user" placeholder="Search...">
+      </div>
+    </nav>
+    <div class="main-content">
+      <div class="page-title">
+        <h2>Player Details</h2>
+      </div>
     </div>
+
+    <div id="mainContainer" class="container main-content"></div>
 
     <div class="" style="display:none;">
       <input type="date" name="startDate" value="">
       <input type="date" name="endDate" value="">
     </div>
-
     <div class="stats-container">
       <h3 class="stats-title">CS:GO Stats</h3>
       <nav style="display:flex;margin-bottom: 10px;">
@@ -83,12 +114,6 @@
         <a>2</a>
         <a class="fas fa-caret-right"></a>
       </div>
-    </div>
-    <div class="charts" style="display:none;">
-      Here goes the charts
-    </div>
-    <div class="summary" style="display:none;">
-      Here goes the "maps/champions" charts
     </div>
     <div style="display:none;" class="lds-background"><div class="lds-facebook"><div></div><div></div><div></div></div></div>
   </body>

@@ -9,43 +9,54 @@
     <script src="/public/js/index.js"></script>
   </head>
   <body class="light">
-    <div class="faceit-stats-container">
-      <div class="navbar">
-        <div class="navbar-left">
-          <img src="" alt="">
-          <h1>Faceit Stats</h1>
+      <nav class="main-menu">
+        <div class="logo">
+          <span title="Faceit Stats">FS</span>
         </div>
-        <div class="navbar-right">
-          <h3>Donate</h3>
-          <h3>Contact</h3>
+        <a class="" href="https://faceitstats.alexmfv.com/">
+          <div class="home left-menu">
+            <i class="fas fa-home"></i>
+            <span class="menu-value">Home</span>
+          </div>
+        </a>
+        <div class="top-100 left-menu">
+          <i class="fas fa-star"></i>
+          <span class="menu-value" class="menu-value">Top 100</span>
+        </div>
+        <div class="donate left-menu">
+          <i class="fas fa-dollar-sign"></i>
+          <span class="menu-value">Donate</span>
+        </div>
+        <div class="contact left-menu">
+          <i class="fas fa-phone-alt"></i>
+          <span class="menu-value">Contact</span>
+        </div>
+      </nav>
+      <div class="main-content">
+        <div class="page-title">
+          <h2>Home</h2>
+        </div>
+        <div class="search-container">
+          <span>FACEIT login OR SteamID64</span>
+          <div class="index-search">
+            <input type="text" name="" id="steamId" placeholder="Search...">
+            <i class="fas fa-search" id="btnSearch" title="Search"></i>
+          </div>
+        </div>
+        <div class="top-container">
+          <div class="title">
+            <span>Top 5 Elo</span>
+          </div>
+          <div class="top-main topElo"></div>
+        </div>
+        <div class="top-container">
+          <div class="title">
+            <span>Top 5 K/D Ratio</span>
+          </div>
+          <div class="top-main topKd"></div>
         </div>
       </div>
-      <div class="search">
-        <div class="search-field">
-          <div class="field">
-            <input type="text" id="steamId" value="" placeholder="FACEIT login OR SteamID64..">
-          </div>
-          <div class="control">
-            <i class="fas fa-search" id="btnSearch"></i>
-          </div>
-        </div>
-        <div id="radioCont" class="radios">
-          <div class="flex">
-            <input type="radio" class="radio" id="csgo" checked="true" name="game" title="CS:GO" value="csgo">
-            <label for="csgo">CS:GO</label>
-          </div>
-          <div class="flex">
-            <input type="radio" class="radio" id="rocket_league" name="game" title="Rocket League" value="rocket_league">
-            <label for="rocket_league">Rocket League</label>
-          </div>
-          <div class="flex">
-            <input type="radio" class="radio" id="dota2" name="game" title="Dota 2" value="dota2">
-            <label for="dota2">Dota 2</label>
-          </div>
-        </div>
-      </div>
-  </div>
-    <h3>TODO List Index.html</h3>
+    <!--<h3>TODO List Index.html</h3>
     <h4>&nbsp -Everything has to have links to the users profiles.</h4>
     <ul>
       <li>Last Seen Profiles (5, stored in database?)</li>
@@ -56,6 +67,6 @@
       <li>//CSGO STATS: AlexMFV</li>
       <li>//RL Stats: Krubixx</li>
       <li>//Dota2 Stats: tsunomori</li>
-    </ul>
+    </ul>-->
   </body>
 </html>

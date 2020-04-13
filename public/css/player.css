@@ -2,6 +2,17 @@
   margin-bottom: 10px;
 }
 
+/*NEW*/
+.page-title{
+  border-left: 10px solid #dcdcdc;
+  border-right: 130px solid #dcdcdc;
+}
+
+.page-title h2{
+  margin-left: 50px;
+}
+
+/*OLD*/
 .profile-container{
   min-height: 7.5em;
   border: 1px solid #b7b7b7;
@@ -350,4 +361,58 @@
 
 .table-matches .matchId{
   cursor: pointer;;
+}
+
+.pagination{
+  width: 100%;
+  display: inline-block;
+  border-top: 1px solid rgba(3,3,3,0.7511205165660014);
+  padding: 1px 0 1px 0;
+  user-select: none;
+}
+
+.pagination a{
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.pagination a:hover{
+  cursor: pointer;
+  background-color: #df6f0d;
+  color: #fff;
+}
+
+.table-button{
+  height: 2.5em;
+  font-weight: 700;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: calc(.375em - 1px) calc(.625em - 1px);
+  position: relative;
+  font-size: 14px;
+}
+
+.is-primary{
+  background-color: rgba(3,3,3,0.7511205165660014);
+  border-color: transparent;
+  color: #fff;
+  font-size: 12px;
+}
+
+.is-success{
+  background-color: #4bbf73;
+  border-color: transparent;
+  color: #fff;
+}
+
+.is-danger{
+  background-color: #d9534f;
+  border-color: transparent;
+  color: #fff;
+}
+
+.is-small{
+  border-radius: 0;
+  font-size: .75rem;
 }

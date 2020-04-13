@@ -1,5 +1,5 @@
 body{
-  margin:0;
+  user-select: none;
 }
 
 .faceit-stats-container{
@@ -8,122 +8,133 @@ body{
   color: var(--bg);
 }
 
-.faceit-stats-container .navbar{
-  padding: 10px 200px;
-  border-bottom: 0.3px solid var(--bg);
+.page-title{
+  border-left: 10px solid #dcdcdc;
+  border-right: 130px solid #dcdcdc;
+  margin: 20px 0;
 }
 
-.navbar-left, .navbar-right{
-  display: inline-block;
+.page-title h2{
+  margin-left: 50px;
 }
 
-.navbar-left{
-  width: 50%;
-}
-.navbar-right{
-  width: 49%;
-  text-align: end;
-}
-
-.faceit-stats-container .navbar h1{
-    margin: 5px;
-    font-size: 30px;
-    display: flex;
-}
-.faceit-stats-container .navbar h3{
-    display: inline-flex;
-}
-
-
-.faceit-stats-container .search{
-  padding: 20px 250px;
-}
-
-.search-field{
-  display: flex;
-}
-
-.search-field .field{
+.search-container{
   width: 100%;
-  margin-right: 0.75rem;
+  text-align: center;
+  margin-top: 30px;
 }
 
-.search-field .field #steamId{
-  display: inline-flex;
-  font-size: 1.25rem;
-  width: 100%;
-  height: 2.5em;
-  padding-left: 10px;
+.search-container span{
+  font-size: 25px;
+  font-weight: 700;
+  font-family: "Bahnschrift";
+}
+
+.index-search{
+  margin-top: 10px;
+}
+
+.index-search input{
+  width: 35%;
+  height: 48px;
+  padding: 15px;
+  border-width: 0;
+  color: #fff;
+  background-color: #F5C167;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.index-search input::placeholder{
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.index-search input:focus{
   outline: none;
-  border: 2px solid var(--bg);
-  background-color: var(--text);
-  color: var(--bg);
 }
 
-.search-field #btnSearch{
-  display: block;
+.index-search i{
+  font-size: 25px;
+  line-height: normal;
+  color: #afafaf;
   cursor: pointer;
-  font-size: 1.25rem;
-  height: 1.1em;
-  padding: 13px;
-  position: relative;
-  background-color: var(--text);
-  color: var(--bg);
+  vertical-align: middle;
+  margin-left: 10px;
 }
 
-.search-field #btnSearch:hover{
+.index-search i:hover{
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
   perspective: 1000px;
 }
 
-.radios{
-  margin-top: 10px;
+/*Top 5 Area*/
+.top-container{
+  padding: 40px;
+  font-family: "Bahnschrift";
 }
 
-.flex {
-  display: inline-flex;;
-  align-items: center;
-  margin-right: 25px;
+.top-container .title span{
+  text-transform: uppercase;
+  font-size: 25px;
+  letter-spacing: 5px;
 }
 
-.radios label{
+.top-main{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-gap: 1rem;
+}
+
+.top-main .player-container{
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-top: 20px;
+  transition: transform 0.6s;
   cursor: pointer;
-  margin-left: 5px;
 }
 
-input[type="radio"] {
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  /* create custom radiobutton appearance */
-  outline: none;
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  padding: 3px;
-  /* background-color only for content */
-  background-clip: content-box;
-  border: 2px solid #bbb;
-  background-color: #e7e6e7;
-  border-radius: 50%;
+.player-container:hover{
+  transform: translateY(-10px);
 }
 
-input[type="radio"]:checked {
-  background-color: #df6f0d;
+.dark .player-container{
+  background-color: #545454;
 }
 
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
+.player-container .img-container{
+  width: 80px;
+  height: 80px;
+  background-color: lightgray;
+  float: left;
+}
+.player-container .img-container img{
+  width: 100%;
+  height: 100%;
+}
 
-  30%, 50%, 70% {
-    transform: translate3d(-2px, 0, 0);
-  }
-  40%, 60% {
-    transform: translate3d(2px, 0, 0);
+.player-container .values{
+  margin-left: 10px;
+  float: left;
+}
+
+.player-container .values span:not(:nth-child(1)){
+  display: block;
+  margin: 8px 0 0;
+  color: #9e9e9e;
+  font-size: 13px;
+}
+
+.dark .values span:not(:nth-child(1)){
+  color: #c3c3c3;
+}
+
+.player-container .values .name {
+  color: #707070;
+}
+
+.dark .values .name{
+  color: #ffffff;
 }
