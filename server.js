@@ -41,6 +41,7 @@ app.get('/api/player/:id', getPlayerData);
 app.get('/api/ranking/:player', getPlayerRanking);
 app.get('/api/player/matches/:player', getPlayerMatches);
 app.get('/api/player/match/:match', getMatchInfo);
+app.get('/api/match/:id', getMatchData);
 
 app.listen(8080);
 console.log("Server listening on port 8080!");
@@ -122,6 +123,20 @@ async function getMatchInfo(req, res){
     value = await fetch(faceitUrl + strMatchInfo
       .replace('<matchId>', matchId), packet).then((res) => { return res.json(); });
 
+    res.json(value);
+  }
+  catch(e){
+    error(res, e);
+  }
+}
+
+async function getMatchData(req, res){
+  let value;
+  try{
+    const id = req.params.id;
+
+    value = await fetch(faceitUrl + strMatchInfo
+      .replace('<matchId>', id), packet).then((res) => { return res.json(); });
     res.json(value);
   }
   catch(e){
